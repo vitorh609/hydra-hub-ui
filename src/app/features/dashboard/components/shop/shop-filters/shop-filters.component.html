@@ -1,0 +1,37 @@
+<div class="shop-filters">
+  <button class="btn btn-primary w-100" type="button" (click)="onAddProduct()">Add New Product</button>
+
+  <div class="filter-section">
+    <h6 class="filter-title">Filter by Category</h6>
+    <div class="filter-list">
+      @for (category of categories; track category) {
+        <button
+          class="filter-item"
+          type="button"
+          [class.is-active]="category === selectedCategory"
+          (click)="setCategory(category)"
+        >
+          <app-icon name="store" [size]="16"></app-icon>
+          <span>{{ category }}</span>
+        </button>
+      }
+    </div>
+  </div>
+
+  <div class="filter-section">
+    <h6 class="filter-title">Sort By</h6>
+    <div class="filter-list">
+      @for (option of sortOptions; track option) {
+        <button
+          class="filter-item"
+          type="button"
+          [class.is-active]="option === selectedSort"
+          (click)="setSort(option)"
+        >
+          <app-icon name="filter" [size]="16"></app-icon>
+          <span>{{ option }}</span>
+        </button>
+      }
+    </div>
+  </div>
+</div>

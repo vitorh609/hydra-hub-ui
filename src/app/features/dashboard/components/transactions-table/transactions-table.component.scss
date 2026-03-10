@@ -1,0 +1,14 @@
+.table {
+  margin-bottom: 0;
+}
+
+.table-dark {
+  --bs-table-bg: transparent;
+  --bs-table-color: var(--text-1);
+  --bs-table-striped-color: var(--text-1);
+}
+
+.table-dark thead th {
+  font-size: 0.75rem;
+  letter-spacing: 0.04em;
+}

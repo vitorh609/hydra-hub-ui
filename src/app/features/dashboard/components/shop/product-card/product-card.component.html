@@ -1,0 +1,27 @@
+<div class="product-card">
+  <div class="product-image">
+    <img [src]="product.imageUrl" [alt]="product.name" />
+    <div class="product-actions">
+      <button class="btn app-icon-btn" type="button" (click)="onToggleFavorite()">
+        <app-icon [name]="product.isFavorite ? 'heart-filled' : 'heart'" [size]="16"></app-icon>
+      </button>
+      <button class="btn app-icon-btn" type="button" (click)="onEdit()">
+        <app-icon name="edit" [size]="16"></app-icon>
+      </button>
+      <button class="btn app-icon-btn" type="button" (click)="onRemove()">
+        <app-icon name="trash" [size]="16"></app-icon>
+      </button>
+    </div>
+  </div>
+
+  <div class="product-body">
+    <div class="product-title">{{ product.name }}</div>
+    <div class="product-pricing">
+      <span class="product-price">{{ product.price | currency }}</span>
+      @if (product.oldPrice) {
+        <span class="product-old-price">{{ product.oldPrice | currency }}</span>
+      }
+    </div>
+    <app-rating-stars [rating]="product.rating" [size]="16"></app-rating-stars>
+  </div>
+</div>

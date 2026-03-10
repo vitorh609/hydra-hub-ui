@@ -1,0 +1,60 @@
+<section class="shop-hero">
+  <div>
+    <div class="shop-breadcrumb app-muted">Home • Shop</div>
+    <h2 class="mb-0">Shop</h2>
+  </div>
+  <div class="shop-illustration" aria-hidden="true">
+    <svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">
+      <rect x="12" y="20" width="140" height="80" rx="16" />
+      <rect x="32" y="38" width="90" height="12" rx="6" />
+      <rect x="32" y="58" width="70" height="12" rx="6" />
+      <circle cx="162" cy="72" r="18" />
+    </svg>
+  </div>
+</section>
+
+<div class="row g-4">
+  <div class="col-12 col-lg-3">
+    <app-shop-filters
+      [categories]="categories"
+      [selectedCategory]="selectedCategory()"
+      [sortOptions]="sortOptions"
+      [selectedSort]="selectedSort()"
+      (categoryChange)="updateCategory($event)"
+      (sortChange)="updateSort($event)"
+      (addProduct)="addProduct()"
+    ></app-shop-filters>
+  </div>
+
+  <div class="col-12 col-lg-9">
+    <div class="shop-toolbar">
+      <h5 class="mb-0">Products</h5>
+      <div class="shop-search">
+        <app-icon name="search" [size]="16"></app-icon>
+        <input
+          type="text"
+          class="form-control app-input"
+          placeholder="Search Product"
+          [formControl]="searchCtrl"
+        />
+      </div>
+    </div>
+
+    @if (sorted().length === 0) {
+      <div class="shop-empty app-muted">No products found.</div>
+    } @else {
+      <div class="row g-4">
+        @for (product of sorted(); track product.id) {
+          <div class="col-12 col-md-6 col-lg-4">
+            <app-product-card
+              [product]="product"
+              (toggleFavorite)="toggleFavorite($event)"
+              (edit)="editProduct($event)"
+              (remove)="removeProduct($event)"
+            ></app-product-card>
+          </div>
+        }
+      </div>
+    }
+  </div>
+</div>

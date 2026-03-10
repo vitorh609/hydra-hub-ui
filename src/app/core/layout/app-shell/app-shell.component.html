@@ -1,0 +1,9 @@
+<div class="app-shell" [class.sidebar-collapsed]="isCollapsed()">
+  <app-sidebar class="sidebar"></app-sidebar>
+  <div class="content">
+    <app-topbar></app-topbar>
+    <main class="page">
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+</div>

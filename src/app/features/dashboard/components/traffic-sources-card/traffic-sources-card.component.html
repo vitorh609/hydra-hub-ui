@@ -1,0 +1,21 @@
+<app-card padding="p-4">
+  <div class="d-flex align-items-center justify-content-between mb-3">
+    <div>
+      <h5 class="mb-1">Traffic Sources</h5>
+      <div class="app-muted small">Sessions overview</div>
+    </div>
+    <div class="app-muted small">Last 30 days</div>
+  </div>
+
+  <div class="d-flex flex-column gap-3">
+    @for (source of sources; track source.label) {
+      <div>
+        <div class="d-flex align-items-center justify-content-between mb-2">
+          <div class="fw-semibold">{{ source.label }}</div>
+          <div class="app-muted small">{{ source.percentage }}</div>
+        </div>
+        <app-progress [value]="source.value" [tone]="source.tone"></app-progress>
+      </div>
+    }
+  </div>
+</app-card>

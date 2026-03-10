@@ -1,0 +1,83 @@
+.note-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.85rem 1rem;
+  border-radius: var(--card-radius);
+  border: 1px solid transparent;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.note-item:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 0.2rem color-mix(in srgb, var(--primary) 25%, transparent);
+}
+
+.note-item-body {
+  flex: 1;
+  min-width: 0;
+}
+
+.note-item-title {
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.note-item-date {
+  font-size: 0.8rem;
+}
+
+.note-item.is-active {
+  border-color: var(--primary);
+  box-shadow: 0 0 0 2px color-mix(in srgb, var(--primary) 20%, transparent);
+}
+
+.note-item-trash {
+  padding: 0.25rem;
+  background: transparent;
+  border-color: var(--border);
+}
+
+.note-blue {
+  background: var(--note-blue-bg);
+}
+
+.note-blue .note-item-title {
+  color: var(--note-blue-fg);
+}
+
+.note-pink {
+  background: var(--note-pink-bg);
+}
+
+.note-pink .note-item-title {
+  color: var(--note-pink-fg);
+}
+
+.note-orange {
+  background: var(--note-orange-bg);
+}
+
+.note-orange .note-item-title {
+  color: var(--note-orange-fg);
+}
+
+.note-green {
+  background: var(--note-green-bg);
+}
+
+.note-green .note-item-title {
+  color: var(--note-green-fg);
+}
+
+.note-teal {
+  background: var(--note-teal-bg);
+}
+
+.note-teal .note-item-title {
+  color: var(--note-teal-fg);
+}

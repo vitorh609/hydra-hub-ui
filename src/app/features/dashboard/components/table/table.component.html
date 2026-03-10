@@ -1,0 +1,118 @@
+<div class="app-table-card" [class.is-frameless]="!framed">
+  <div class="table-responsive">
+    <table class="table align-middle app-table">
+      <thead>
+        <tr>
+          @if (selectable) {
+            <th class="table-col-select">
+              <input
+                type="checkbox"
+                class="form-check-input"
+                [checked]="allSelected()"
+                [indeterminate]="someSelected()"
+                (change)="toggleAll()"
+              />
+            </th>
+          }
+          @for (column of columns; track column.key) {
+            <th [style.width]="column.width" [ngClass]="getAlignClass(column.align)">
+              {{ column.header }}
+            </th>
+          }
+          @if (actions?.length) {
+            <th class="text-end">Action</th>
+          }
+        </tr>
+      </thead>
+      <tbody>
+        @if (rows.length === 0) {
+          <tr>
+            <td class="app-muted py-4 text-center" [attr.colspan]="columns.length + (selectable ? 1 : 0) + (actions?.length ? 1 : 0)">
+              No results found.
+            </td>
+          </tr>
+        } @else {
+          @for (row of rows; track trackRow($index, row)) {
+            <tr [class.is-selected]="isSelected(row)">
+              @if (selectable) {
+                <td class="table-col-select">
+                  <input
+                    type="checkbox"
+                    class="form-check-input"
+                    [checked]="isSelected(row)"
+                    (change)="toggleRow(row)"
+                  />
+                </td>
+              }
+              @for (column of columns; track column.key) {
+                <td [ngClass]="getAlignClass(column.align)">
+                  <span [innerHTML]="getCellValue(row, column)"></span>
+                </td>
+              }
+              @if (actions?.length) {
+                <td class="text-end">
+                  <div class="dropdown table-action-menu">
+                    <button
+                      class="btn app-icon-btn table-action-trigger"
+                      type="button"
+                      (click)="toggleActionMenu(row, $event)"
+                      [attr.aria-expanded]="openMenuId() === rowId(row)"
+                    >
+                      <app-icon name="dots" [size]="16"></app-icon>
+                    </button>
+                    <ul
+                      class="dropdown-menu dropdown-menu-end"
+                      [class.show]="openMenuId() === rowId(row)"
+                    >
+                      @for (action of visibleActions(row); track action.id) {
+                        <li>
+                          <button
+                            class="dropdown-item"
+                            [ngClass]="{ 'table-action-danger': action.variant === 'danger' }"
+                            type="button"
+                            (click)="action.action(row); closeActionMenu()"
+                          >
+                            <app-icon [name]="action.icon" [size]="16"></app-icon>
+                            <span class="ms-2">{{ action.label }}</span>
+                          </button>
+                        </li>
+                      }
+                    </ul>
+                  </div>
+                </td>
+              }
+            </tr>
+          }
+        }
+      </tbody>
+    </table>
+  </div>
+
+  @if (state) {
+    <div class="table-footer">
+      <div class="table-footer-left">
+        <span class="app-muted">Items per page:</span>
+        <select
+          class="form-select form-select-sm app-input"
+          [value]="state.pageSize"
+          (change)="onPageSizeChange($event)"
+        >
+          @for (size of pageSizeOptions; track size) {
+            <option [value]="size">{{ size }}</option>
+          }
+        </select>
+      </div>
+      <div class="table-footer-right">
+        <span class="app-muted">{{ getRangeStart() }} - {{ getRangeEnd() }} of {{ state.total }}</span>
+        <div class="table-pagination">
+          <button class="btn app-icon-btn" type="button" (click)="updatePage(state.page - 1)">
+            <app-icon name="chevron-left" [size]="16"></app-icon>
+          </button>
+          <button class="btn app-icon-btn" type="button" (click)="updatePage(state.page + 1)">
+            <app-icon name="chevron-right" [size]="16"></app-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  }
+</div>

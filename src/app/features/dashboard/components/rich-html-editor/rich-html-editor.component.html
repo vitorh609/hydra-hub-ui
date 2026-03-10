@@ -1,0 +1,140 @@
+@if (label) {
+  <label class="editor-label">{{ label }}</label>
+}
+
+<div class="editor-shell" [style.--editor-min-height.px]="minHeight">
+  <div class="editor-toolbar" role="toolbar" aria-label="Document formatting toolbar">
+    <button
+      class="btn btn-sm app-icon-btn toolbar-btn"
+      type="button"
+      [disabled]="isDisabled"
+      (mousedown)="preventToolbarMouseDown($event)"
+      (click)="applyCommand('bold')"
+    >
+      <strong>B</strong>
+    </button>
+
+    <button
+      class="btn btn-sm app-icon-btn toolbar-btn"
+      type="button"
+      [disabled]="isDisabled"
+      (mousedown)="preventToolbarMouseDown($event)"
+      (click)="applyCommand('italic')"
+    >
+      <em>I</em>
+    </button>
+
+    <button
+      class="btn btn-sm app-icon-btn toolbar-btn"
+      type="button"
+      [disabled]="isDisabled"
+      (mousedown)="preventToolbarMouseDown($event)"
+      (click)="applyCommand('underline')"
+    >
+      <span class="toolbar-underline">U</span>
+    </button>
+
+    <span class="toolbar-divider" aria-hidden="true"></span>
+
+    <button
+      class="btn btn-sm app-icon-btn toolbar-btn"
+      type="button"
+      [disabled]="isDisabled"
+      (mousedown)="preventToolbarMouseDown($event)"
+      (click)="applyCommand('insertOrderedList')"
+    >
+      1.
+    </button>
+
+    <button
+      class="btn btn-sm app-icon-btn toolbar-btn"
+      type="button"
+      [disabled]="isDisabled"
+      (mousedown)="preventToolbarMouseDown($event)"
+      (click)="applyCommand('insertUnorderedList')"
+    >
+      •
+    </button>
+
+    @if (toolbarVariant === 'full') {
+      <span class="toolbar-divider" aria-hidden="true"></span>
+
+      <select
+        class="form-select form-select-sm toolbar-select"
+        [disabled]="isDisabled"
+        [value]="selectedHeading"
+        (change)="onHeadingChange($event)"
+      >
+        @for (option of headingOptions; track option.value) {
+          <option [value]="option.value">{{ option.label }}</option>
+        }
+      </select>
+
+      <button
+        class="btn btn-sm app-icon-btn toolbar-btn"
+        type="button"
+        [disabled]="isDisabled"
+        (mousedown)="preventToolbarMouseDown($event)"
+        (click)="applyLink()"
+      >
+        Link
+      </button>
+
+      <span class="toolbar-divider" aria-hidden="true"></span>
+
+      <button
+        class="btn btn-sm app-icon-btn toolbar-btn"
+        type="button"
+        [disabled]="isDisabled"
+        (mousedown)="preventToolbarMouseDown($event)"
+        (click)="applyCommand('justifyLeft')"
+      >
+        Left
+      </button>
+
+      <button
+        class="btn btn-sm app-icon-btn toolbar-btn"
+        type="button"
+        [disabled]="isDisabled"
+        (mousedown)="preventToolbarMouseDown($event)"
+        (click)="applyCommand('justifyCenter')"
+      >
+        Center
+      </button>
+
+      <button
+        class="btn btn-sm app-icon-btn toolbar-btn"
+        type="button"
+        [disabled]="isDisabled"
+        (mousedown)="preventToolbarMouseDown($event)"
+        (click)="applyCommand('justifyRight')"
+      >
+        Right
+      </button>
+
+      <button
+        class="btn btn-sm app-icon-btn toolbar-btn"
+        type="button"
+        [disabled]="isDisabled"
+        (mousedown)="preventToolbarMouseDown($event)"
+        (click)="clearFormatting()"
+      >
+        Clear
+      </button>
+    }
+  </div>
+
+  <div class="editor-body" [class.empty]="isEmpty">
+    <div
+      #editable
+      class="editor-editable"
+      role="textbox"
+      aria-multiline="true"
+      [attr.contenteditable]="isDisabled ? 'false' : 'true'"
+      [attr.data-placeholder]="placeholder"
+      [style.minHeight.px]="minHeight"
+      (input)="onInput()"
+      (blur)="onBlur()"
+    ></div>
+  </div>
+</div>

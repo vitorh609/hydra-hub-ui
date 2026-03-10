@@ -1,0 +1,24 @@
+@if (label) {
+  <label class="image-upload-label">{{ label }}</label>
+}
+
+<div class="image-upload" role="button" tabindex="0" (click)="triggerFileSelect()">
+  <input
+    #fileInput
+    type="file"
+    [accept]="accept"
+    (change)="onFileChange($event)"
+    hidden
+  />
+
+  @if (preview) {
+    <img [src]="preview" alt="Image preview" />
+  } @else {
+    <div class="image-upload-placeholder">
+      <div class="image-upload-title">Drop files here or browse</div>
+      @if (hint) {
+        <div class="image-upload-hint app-muted">{{ hint }}</div>
+      }
+    </div>
+  }
+</div>

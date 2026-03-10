@@ -1,0 +1,13 @@
+@if (label) {
+  <label class="form-label" [attr.for]="id">{{ label }}</label>
+}
+<input
+  class="form-control app-input app-input-field"
+  [id]="id"
+  [type]="type"
+  [placeholder]="placeholder"
+  [value]="value"
+  [disabled]="isDisabled"
+  (input)="onInput($event)"
+  (blur)="onBlur()"
+/>

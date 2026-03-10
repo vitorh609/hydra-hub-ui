@@ -1,0 +1,45 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.notes-search {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 12px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  margin-bottom: 1.5rem;
+}
+
+.notes-search input {
+  background: transparent;
+  border: none;
+  padding: 0;
+  color: var(--text-1);
+}
+
+.notes-search input:focus {
+  box-shadow: none;
+}
+
+.notes-list-header {
+  margin-bottom: 1rem;
+}
+
+.notes-items {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  overflow-y: auto;
+  padding-right: 0.25rem;
+  flex: 1;
+  min-height: 0;
+}
+
+.notes-empty {
+  font-size: 0.9rem;
+}

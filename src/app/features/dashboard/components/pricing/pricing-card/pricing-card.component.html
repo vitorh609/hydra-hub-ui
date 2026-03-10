@@ -1,0 +1,32 @@
+<app-card padding="p-4" class="pricing-card">
+  <div class="pricing-header">
+    <span class="pricing-icon">
+      <app-icon name="star" [size]="22"></app-icon>
+    </span>
+    @if (plan.badge === 'POPULAR') {
+      <span class="pricing-badge">POPULAR</span>
+    }
+  </div>
+
+  <div class="pricing-title">{{ plan.title }}</div>
+
+  <div class="pricing-price">
+    <span class="pricing-amount">{{ displayPrice }}</span>
+    @if (displayPrice !== 'Free') {
+      <span class="pricing-suffix">{{ suffix }}</span>
+    }
+  </div>
+
+  <ul class="pricing-features">
+    @for (feature of plan.features; track feature.label) {
+      <li [class.is-included]="feature.included">
+        <app-icon [name]="feature.included ? 'check' : 'x'" [size]="18"></app-icon>
+        <span>{{ feature.label }}</span>
+      </li>
+    }
+  </ul>
+
+  <button class="btn btn-primary w-100" type="button" (click)="choose.emit(plan)">
+    {{ plan.ctaText }}
+  </button>
+</app-card>

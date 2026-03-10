@@ -1,0 +1,11 @@
+<div class="rating-stars">
+  @for (state of stars; track $index) {
+    @if (state === 'full') {
+      <app-icon name="star" [size]="size"></app-icon>
+    } @else if (state === 'half') {
+      <app-icon name="star-half" [size]="size"></app-icon>
+    } @else {
+      <app-icon name="star-off" [size]="size"></app-icon>
+    }
+  }
+</div>

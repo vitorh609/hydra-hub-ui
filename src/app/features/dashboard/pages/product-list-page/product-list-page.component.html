@@ -1,0 +1,39 @@
+<section class="product-list-hero">
+  <div>
+    <div class="product-list-breadcrumb app-muted">Home • Product List</div>
+    <h2 class="mb-0">Product List</h2>
+  </div>
+  <div class="product-list-illustration" aria-hidden="true">
+    <svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">
+      <rect x="12" y="20" width="140" height="80" rx="16" />
+      <rect x="32" y="38" width="90" height="12" rx="6" />
+      <rect x="32" y="58" width="70" height="12" rx="6" />
+      <circle cx="162" cy="72" r="18" />
+    </svg>
+  </div>
+</section>
+
+<section class="product-list-card">
+  <div class="product-list-toolbar">
+    <div class="product-search">
+      <app-icon name="search" [size]="16"></app-icon>
+      <input
+        type="text"
+        class="form-control app-input"
+        placeholder="Search Product"
+        [formControl]="searchControl"
+      />
+    </div>
+    <button class="btn btn-primary" type="button" (click)="addProduct()">Add Product</button>
+  </div>
+
+  <app-table
+    [rows]="pagedProducts()"
+    [columns]="columns"
+    [actions]="actions"
+    [rowId]="rowId"
+    [state]="state()"
+    [framed]="false"
+    (stateChange)="onStateChange($event)"
+  ></app-table>
+</section>

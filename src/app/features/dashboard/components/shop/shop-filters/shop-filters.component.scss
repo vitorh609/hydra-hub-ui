@@ -1,0 +1,50 @@
+.shop-filters {
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.filter-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.filter-title {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--text-2);
+}
+
+.filter-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.filter-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border: none;
+  background: transparent;
+  color: var(--text-1);
+  padding: 0.5rem 0.75rem;
+  border-radius: 10px;
+  text-align: left;
+  transition: background 0.2s ease;
+}
+
+.filter-item:hover {
+  background: color-mix(in srgb, var(--primary) 8%, transparent);
+}
+
+.filter-item.is-active {
+  background: color-mix(in srgb, var(--primary) 12%, transparent);
+  color: var(--primary);
+}

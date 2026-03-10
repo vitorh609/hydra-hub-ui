@@ -1,0 +1,119 @@
+:host {
+  display: block;
+}
+
+.preview-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.preview-title {
+  margin: 0;
+  color: var(--text-2);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.paper-sheet {
+  width: 100%;
+  max-width: 700px;
+  min-height: 860px;
+  margin-inline: auto;
+  border-radius: var(--card-radius);
+  border: 1px solid var(--border);
+  background: color-mix(in srgb, var(--surface-1) 92%, var(--surface-2));
+  box-shadow: var(--shadow-sm);
+  padding: 2.5rem 2.75rem;
+}
+
+:root[data-theme='light'] .paper-sheet {
+  background: var(--surface-1);
+}
+
+.doc-placeholder {
+  font-size: 0.95rem;
+}
+
+.doc {
+  color: var(--text-1);
+  line-height: 1.65;
+  word-break: break-word;
+}
+
+.doc h1,
+.doc h2,
+.doc h3 {
+  color: var(--text-1);
+  line-height: 1.25;
+  margin: 0 0 0.65rem;
+  font-weight: 700;
+}
+
+.doc h1 {
+  font-size: 2rem;
+}
+
+.doc h2 {
+  font-size: 1.55rem;
+}
+
+.doc h3 {
+  font-size: 1.3rem;
+}
+
+.doc p {
+  margin: 0 0 0.85rem;
+  color: var(--text-1);
+}
+
+.doc ul,
+.doc ol {
+  margin: 0 0 0.95rem;
+  padding-left: 1.45rem;
+}
+
+.doc li {
+  margin-bottom: 0.35rem;
+}
+
+.doc a {
+  color: var(--primary);
+  text-decoration: underline;
+}
+
+.doc blockquote {
+  margin: 1rem 0;
+  padding: 0.5rem 0 0.5rem 1rem;
+  border-left: 3px solid var(--border);
+  color: var(--text-2);
+}
+
+.doc hr {
+  border: 0;
+  border-top: 1px solid var(--border);
+  margin: 1.25rem 0;
+}
+
+.doc .doc-align-left {
+  text-align: left;
+}
+
+.doc .doc-align-center {
+  text-align: center;
+}
+
+.doc .doc-align-right {
+  text-align: right;
+}
+
+.doc .doc-align-justify {
+  text-align: justify;
+}
+
+@media (max-width: 767.98px) {
+  .paper-sheet {
+    min-height: 640px;
+    padding: 1.5rem;
+  }
+}

@@ -1,0 +1,15 @@
+.app-input-field {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  color: var(--text-1);
+}
+
+.app-input-field::placeholder {
+  color: var(--text-2);
+}
+
+.app-input-field:focus {
+  border-color: color-mix(in srgb, var(--primary) 45%, var(--border));
+  box-shadow: 0 0 0 0.2rem color-mix(in srgb, var(--primary) 20%, transparent);
+}

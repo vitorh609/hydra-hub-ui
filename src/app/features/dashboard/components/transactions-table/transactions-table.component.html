@@ -1,0 +1,36 @@
+<app-card padding="p-4">
+  <div class="d-flex align-items-center justify-content-between mb-3">
+    <div>
+      <h5 class="mb-1">Recent Transactions</h5>
+      <div class="app-muted small">Latest invoices</div>
+    </div>
+    <button class="btn btn-sm btn-outline-light app-btn-outline">Export</button>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-dark table-borderless align-middle app-table">
+      <thead>
+        <tr class="app-muted">
+          <th>Invoice</th>
+          <th>Customer</th>
+          <th>Date</th>
+          <th>Amount</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (row of rows; track row.invoiceId) {
+          <tr>
+            <td class="fw-semibold">{{ row.invoiceId }}</td>
+            <td>{{ row.customer }}</td>
+            <td class="app-muted">{{ row.date }}</td>
+            <td>{{ row.amount }}</td>
+            <td>
+              <app-badge [tone]="badgeTone(row.status)">{{ row.status }}</app-badge>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</app-card>

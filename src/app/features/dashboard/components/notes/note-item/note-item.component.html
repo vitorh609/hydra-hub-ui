@@ -1,0 +1,17 @@
+<div
+  class="note-item note-{{ note.color }}"
+  [class.is-active]="selected"
+  role="button"
+  tabindex="0"
+  (click)="onSelect()"
+  (keydown.enter)="onSelect()"
+  (keydown.space)="onSelect()"
+>
+  <div class="note-item-body">
+    <div class="note-item-title">{{ note.title }}</div>
+    <div class="note-item-date app-muted">{{ formattedDate }}</div>
+  </div>
+  <button class="btn app-icon-btn note-item-trash" type="button" (click)="onRemove($event)">
+    <app-icon name="trash" [size]="16"></app-icon>
+  </button>
+</div>

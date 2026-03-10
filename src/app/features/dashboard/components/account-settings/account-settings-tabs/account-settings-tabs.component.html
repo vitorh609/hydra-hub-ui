@@ -1,0 +1,12 @@
+<div class="account-tabs">
+  @for (tab of tabs; track tab) {
+    <button
+      type="button"
+      class="account-tab"
+      [class.active]="tab === active"
+      (click)="selectTab(tab)"
+    >
+      {{ tab }}
+    </button>
+  }
+</div>

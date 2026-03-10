@@ -1,0 +1,49 @@
+.image-upload-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--text-2);
+  font-size: 0.85rem;
+}
+
+.image-upload {
+  border: 1px dashed var(--border);
+  border-radius: 12px;
+  background: var(--surface-2);
+  padding: 1.5rem;
+  text-align: center;
+  color: var(--text-1);
+  cursor: pointer;
+  min-height: 180px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.image-upload:hover {
+  background: color-mix(in srgb, var(--primary) 8%, var(--surface-2));
+}
+
+.image-upload-placeholder {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.image-upload-title {
+  font-weight: 600;
+}
+
+.image-upload img {
+  max-width: 100%;
+  max-height: 220px;
+  border-radius: 12px;
+}
+
+:host(.has-preview) .image-upload {
+  padding: 0.75rem;
+}
+
+:host(.is-disabled) .image-upload {
+  opacity: 0.7;
+  pointer-events: none;
+}

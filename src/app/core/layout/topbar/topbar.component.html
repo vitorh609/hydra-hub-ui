@@ -1,0 +1,37 @@
+<header class="topbar">
+  <div class="d-flex align-items-center gap-3">
+    <button class="btn topbar-action icon-only" type="button" (click)="toggleSidebar()">
+      <app-icon name="menu" [size]="22"></app-icon>
+    </button>
+    <div class="search">
+      <app-icon name="search" [size]="18"></app-icon>
+      <input
+        type="text"
+        class="form-control app-input"
+        placeholder="Search"
+        [formControl]="searchControl"
+      />
+    </div>
+  </div>
+
+  <div class="d-flex align-items-center gap-3 topbar-actions">
+    <button class="btn topbar-action icon-only" type="button">
+      <app-icon name="bell" [size]="18"></app-icon>
+    </button>
+    <button
+      class="btn topbar-action"
+      type="button"
+      (click)="toggleTheme()"
+      [attr.aria-label]="themeMode() === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'"
+    >
+      @if (themeMode() === 'dark') {
+        <app-icon name="sun" [size]="18"></app-icon>
+      } @else {
+        <app-icon name="moon" [size]="18"></app-icon>
+      }
+    </button>
+    <div class="profile topbar-action">
+      <app-icon name="user" [size]="22"></app-icon>
+    </div>
+  </div>
+</header>

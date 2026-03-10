@@ -1,0 +1,99 @@
+<section class="product-hero">
+  <div>
+    <div class="product-breadcrumb app-muted">Home • Add Product</div>
+    <h2 class="mb-0">Add Product</h2>
+  </div>
+  <div class="product-hero-illustration" aria-hidden="true">
+    <svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">
+      <rect x="12" y="20" width="140" height="80" rx="16" />
+      <rect x="32" y="38" width="90" height="12" rx="6" />
+      <rect x="32" y="58" width="70" height="12" rx="6" />
+      <circle cx="162" cy="72" r="18" />
+    </svg>
+  </div>
+</section>
+
+<form class="product-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="row g-4">
+    <div class="col-12 col-lg-8">
+      <app-card padding="p-4">
+        <h5 class="mb-3">General</h5>
+        <app-input label="Product Name" formControlName="title" [placeholder]="'Product name'"></app-input>
+        @if (submitted() && form.controls.title.invalid) {
+          <div class="text-danger small mt-1">Product name is required.</div>
+        }
+
+        <div class="mt-4">
+          <app-rich-textarea
+            label="Description"
+            placeholder="Write a short description..."
+            formControlName="description"
+          ></app-rich-textarea>
+        </div>
+      </app-card>
+
+      <app-card padding="p-4" class="mt-4">
+        <h5 class="mb-3">Media</h5>
+        <app-image-upload
+          label="Upload media"
+          hint="Only *.png, *.jpg, *.jpeg"
+          formControlName="mediaBase64"
+        ></app-image-upload>
+      </app-card>
+
+      <app-card padding="p-4" class="mt-4">
+        <h5 class="mb-3">Variation</h5>
+        <div class="app-muted">Add variations like size or color here.</div>
+      </app-card>
+    </div>
+
+    <div class="col-12 col-lg-4">
+      <app-card padding="p-4">
+        <h5 class="mb-3">Thumbnail</h5>
+        <app-image-upload
+          label="Thumbnail"
+          hint="Only *.png, *.jpg, *.jpeg"
+          formControlName="thumbnailBase64"
+        ></app-image-upload>
+      </app-card>
+
+      <app-card padding="p-4" class="mt-4">
+        <h5 class="mb-3">Status</h5>
+        <label class="form-label">Product Status</label>
+        <select class="form-select app-input" formControlName="status">
+          @for (option of statusOptions; track option.value) {
+            <option [value]="option.value">{{ option.label }}</option>
+          }
+        </select>
+        <div class="app-muted small mt-2">Choose if this product is available for sale.</div>
+      </app-card>
+
+      <app-card padding="p-4" class="mt-4">
+        <h5 class="mb-3">Product Details</h5>
+        <label class="form-label">Categories</label>
+        <select class="form-select app-input">
+          <option>Apparel</option>
+          <option>Footwear</option>
+          <option>Accessories</option>
+        </select>
+        <button class="btn btn-sm app-btn-outline mt-3" type="button">Create new category</button>
+      </app-card>
+
+      <app-card padding="p-4" class="mt-4">
+        <h5 class="mb-3">Pricing</h5>
+        <label class="form-label">Price</label>
+        <input type="number" class="form-control app-input" formControlName="price" />
+        @if (submitted() && form.controls.price.invalid) {
+          <div class="text-danger small mt-1">Price is required.</div>
+        }
+
+        <app-input label="Size (optional)" formControlName="size"></app-input>
+      </app-card>
+    </div>
+  </div>
+
+  <div class="product-actions">
+    <button class="btn app-btn-outline" type="button" (click)="onCancel()">Cancel</button>
+    <button class="btn btn-primary" type="submit">Add Product</button>
+  </div>
+</form>

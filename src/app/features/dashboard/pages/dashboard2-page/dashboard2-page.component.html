@@ -1,0 +1,71 @@
+<app-page-container title="eCommerce">
+  <div subtitle class="app-muted">Dashboard overview</div>
+  <div breadcrumbs class="app-muted small mb-4">Dashboards / Dashboard 2</div>
+
+  <div class="row g-3 mb-4">
+    <div class="col-12 col-md-6 col-xl-3">
+      <app-metric-card
+        title="Total Sales"
+        value="$42,850"
+        deltaText="+12.5%"
+        trend="up"
+        iconName="cart"
+        accent="primary"
+      ></app-metric-card>
+    </div>
+    <div class="col-12 col-md-6 col-xl-3">
+      <app-metric-card
+        title="Orders"
+        value="1,248"
+        deltaText="+3.2%"
+        trend="up"
+        iconName="receipt"
+        accent="success"
+      ></app-metric-card>
+    </div>
+    <div class="col-12 col-md-6 col-xl-3">
+      <app-metric-card
+        title="Refunds"
+        value="$1,920"
+        deltaText="-1.8%"
+        trend="down"
+        iconName="refresh"
+        accent="warning"
+      ></app-metric-card>
+    </div>
+    <div class="col-12 col-md-6 col-xl-3">
+      <app-metric-card
+        title="New Clients"
+        value="386"
+        deltaText="+8.1%"
+        trend="up"
+        iconName="user"
+        accent="danger"
+      ></app-metric-card>
+    </div>
+  </div>
+
+  <div class="row g-3 mb-4">
+    <div class="col-12 col-xl-8">
+      <app-sales-overview-card></app-sales-overview-card>
+    </div>
+    <div class="col-12 col-xl-4">
+      <app-payment-methods-card></app-payment-methods-card>
+    </div>
+  </div>
+
+  <div class="row g-3 mb-4">
+    <div class="col-12">
+      <app-transactions-table></app-transactions-table>
+    </div>
+  </div>
+
+  <div class="row g-3">
+    <div class="col-12 col-xl-6">
+      <app-traffic-sources-card></app-traffic-sources-card>
+    </div>
+    <div class="col-12 col-xl-6">
+      <app-products-table></app-products-table>
+    </div>
+  </div>
+</app-page-container>

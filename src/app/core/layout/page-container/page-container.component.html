@@ -1,0 +1,11 @@
+<section class="page-container">
+  <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-4">
+    <div>
+      <h3 class="mb-1">{{ title }}</h3>
+      <ng-content select="[subtitle]"></ng-content>
+    </div>
+    <ng-content select="[actions]"></ng-content>
+  </div>
+  <ng-content select="[breadcrumbs]"></ng-content>
+  <ng-content></ng-content>
+</section>

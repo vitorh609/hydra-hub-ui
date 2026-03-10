@@ -1,0 +1,35 @@
+@if (label) {
+  <label class="rich-label">{{ label }}</label>
+}
+
+<div class="rich-toolbar">
+  <button class="btn btn-sm app-icon-btn" type="button" (click)="applyCommand('bold')">
+    <strong>B</strong>
+  </button>
+  <button class="btn btn-sm app-icon-btn" type="button" (click)="applyCommand('italic')">
+    <em>I</em>
+  </button>
+  <button class="btn btn-sm app-icon-btn" type="button" (click)="applyCommand('underline')">
+    <span class="rich-underline">U</span>
+  </button>
+  <button class="btn btn-sm app-icon-btn" type="button" (click)="applyCommand('insertUnorderedList')">
+    •
+  </button>
+  <button class="btn btn-sm app-icon-btn" type="button" (click)="applyCommand('insertOrderedList')">
+    1.
+  </button>
+  <button class="btn btn-sm app-icon-btn" type="button" (click)="applyHeading()">H4</button>
+  <button class="btn btn-sm app-icon-btn" type="button" (click)="applyLink()">Link</button>
+</div>
+
+<div class="rich-editor">
+  <div
+    #editable
+    class="rich-editable"
+    contenteditable="true"
+    [style.minHeight.px]="minHeight"
+    [attr.data-placeholder]="placeholder"
+    (input)="onInput()"
+    (blur)="onBlur()"
+  ></div>
+</div>

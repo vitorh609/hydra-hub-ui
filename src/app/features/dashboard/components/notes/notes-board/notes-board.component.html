@@ -1,0 +1,22 @@
+<section class="notes-hero">
+  <div>
+    <div class="notes-breadcrumb app-muted">Home • Notes</div>
+    <h2 class="mb-0">Notes</h2>
+  </div>
+  <div class="notes-hero-illustration" aria-hidden="true">
+    <svg viewBox="0 0 180 120" xmlns="http://www.w3.org/2000/svg">
+      <rect x="10" y="18" width="140" height="84" rx="16" />
+      <rect x="30" y="36" width="100" height="10" rx="5" />
+      <rect x="30" y="56" width="80" height="10" rx="5" />
+      <circle cx="146" cy="78" r="18" />
+    </svg>
+  </div>
+</section>
+
+<section class="notes-card">
+  <div class="notes-layout" [class.is-list-collapsed]="isListCollapsed">
+    <app-notes-list class="notes-panel notes-list-panel"></app-notes-list>
+    <div class="notes-divider" aria-hidden="true"></div>
+    <app-notes-editor class="notes-panel notes-editor-panel" (toggleList)="toggleList()"></app-notes-editor>
+  </div>
+</section>

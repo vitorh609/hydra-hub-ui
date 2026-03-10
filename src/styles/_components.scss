@@ -1,0 +1,167 @@
+@use "./mixins" as *;
+
+.app-card {
+  @include card-surface;
+}
+
+.app-table {
+  --bs-table-bg: transparent;
+  --bs-table-color: var(--text-1);
+  --bs-table-striped-color: var(--text-1);
+  --bs-table-border-color: var(--border);
+}
+
+.app-table thead th {
+  color: var(--text-2);
+}
+
+.app-input {
+  color: var(--text-1);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+}
+
+.app-input::placeholder {
+  color: var(--text-2);
+}
+
+.app-input:focus {
+  border-color: color-mix(in srgb, var(--primary) 45%, var(--border));
+  box-shadow: 0 0 0 0.2rem color-mix(in srgb, var(--primary) 20%, transparent);
+}
+
+.app-icon-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  color: var(--text-1);
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.app-icon-btn:hover {
+  background: var(--surface-1);
+}
+
+.app-icon-btn:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 0.2rem color-mix(in srgb, var(--primary) 25%, transparent);
+}
+
+.app-btn-outline {
+  --bs-btn-color: var(--text-1);
+  --bs-btn-border-color: var(--border);
+  --bs-btn-hover-color: var(--text-1);
+  --bs-btn-hover-bg: var(--surface-2);
+  --bs-btn-hover-border-color: var(--border);
+  --bs-btn-active-color: var(--text-1);
+  --bs-btn-active-bg: var(--surface-2);
+  --bs-btn-active-border-color: var(--border);
+}
+
+.badge-soft-success {
+  background: color-mix(in srgb, var(--success) 18%, transparent);
+  color: var(--success);
+  border: 1px solid color-mix(in srgb, var(--success) 35%, transparent);
+}
+
+.badge-soft-danger {
+  background: color-mix(in srgb, var(--danger) 18%, transparent);
+  color: var(--danger);
+  border: 1px solid color-mix(in srgb, var(--danger) 35%, transparent);
+}
+
+.badge-soft-warning {
+  background: color-mix(in srgb, var(--warning) 18%, transparent);
+  color: var(--warning);
+  border: 1px solid color-mix(in srgb, var(--warning) 35%, transparent);
+}
+
+.product-cell {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.product-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--primary) 14%, transparent);
+  color: var(--primary);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  overflow: hidden;
+}
+
+.product-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.product-title {
+  font-weight: 600;
+}
+
+.product-subtitle {
+  font-size: 0.85rem;
+  color: var(--text-2);
+}
+
+.app-muted {
+  color: var(--text-2);
+}
+
+.app-border {
+  border-color: var(--border) !important;
+}
+
+.app-surface-2 {
+  background: var(--surface-2);
+}
+
+.app-divider {
+  border-top: 1px solid var(--border);
+}
+
+.icon-badge {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.app-themed-modal .modal-content {
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  color: var(--text-1);
+  box-shadow: var(--shadow-sm);
+}
+
+.app-themed-modal .modal-header,
+.app-themed-modal .modal-footer {
+  border-color: var(--border);
+}
+
+.app-themed-modal .modal-title {
+  color: var(--text-1);
+}
+
+.app-themed-modal .modal-body {
+  color: var(--text-2);
+}
+
+.app-themed-modal .btn-close {
+  filter: var(--modal-close-filter, none);
+}
+
+:root[data-theme='dark'] {
+  --modal-close-filter: invert(1) grayscale(1) brightness(1.4);
+}

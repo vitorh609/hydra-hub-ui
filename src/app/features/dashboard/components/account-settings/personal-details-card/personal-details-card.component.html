@@ -1,0 +1,65 @@
+<app-card padding="p-4">
+  <div [formGroup]="form">
+    <h5 class="mb-3">Personal Details</h5>
+
+    <div class="row g-3">
+      <div class="col-12 col-md-6">
+        <app-input label="Your Name" formControlName="name" [placeholder]="'Full name'"></app-input>
+        @if (showError(form.controls.name)) {
+          <div class="text-danger small mt-1">Name is required.</div>
+        }
+      </div>
+
+      <div class="col-12 col-md-6">
+        <app-input label="Store Name" formControlName="storeName" [placeholder]="'Store name'"></app-input>
+      </div>
+
+      <div class="col-12 col-md-6">
+        <label class="form-label">Location</label>
+        <select class="form-select app-input" formControlName="location">
+          @for (option of locations; track option.value) {
+            <option [value]="option.value">{{ option.label }}</option>
+          }
+        </select>
+      </div>
+
+      <div class="col-12 col-md-6">
+        <label class="form-label">Currency</label>
+        <select class="form-select app-input" formControlName="currency">
+          @for (option of currencies; track option.value) {
+            <option [value]="option.value">{{ option.label }}</option>
+          }
+        </select>
+      </div>
+
+      <div class="col-12 col-md-6">
+        <app-input
+          label="Email"
+          type="email"
+          formControlName="email"
+          [placeholder]="'name@email.com'"
+        ></app-input>
+        @if (showError(form.controls.email)) {
+          <div class="text-danger small mt-1">Valid email is required.</div>
+        }
+      </div>
+
+      <div class="col-12 col-md-6">
+        <app-input
+          label="Phone"
+          type="tel"
+          formControlName="phone"
+          [placeholder]="'(+1) 000 000 000'"
+        ></app-input>
+      </div>
+
+      <div class="col-12">
+        <app-input
+          label="Address"
+          formControlName="address"
+          [placeholder]="'Street address'"
+        ></app-input>
+      </div>
+    </div>
+  </div>
+</app-card>

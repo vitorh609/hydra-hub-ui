@@ -1,0 +1,29 @@
+<app-card padding="p-4">
+  <h5 class="mb-3">Change Profile</h5>
+
+  <div class="profile-photo">
+    <div class="profile-avatar">
+      @if (avatarPreview) {
+        <img [src]="avatarPreview" alt="Profile" />
+      } @else {
+        <app-icon name="user" [size]="44"></app-icon>
+      }
+    </div>
+
+    <div>
+      <div class="profile-actions">
+        <button class="btn btn-primary" type="button" (click)="onUpload()">Upload</button>
+        <button class="btn app-btn-outline" type="button" (click)="onReset()">Reset</button>
+      </div>
+      <div class="app-muted small mt-2">Allowed JPG, GIF or PNG. Max size of 800K</div>
+    </div>
+  </div>
+
+  <app-image-upload
+    class="visually-hidden"
+    label="Profile"
+    hint="Only *.png, *.jpg, *.jpeg, *.gif"
+    accept="image/png,image/jpeg,image/gif"
+    [formControl]="form.controls.avatarBase64"
+  ></app-image-upload>
+</app-card>

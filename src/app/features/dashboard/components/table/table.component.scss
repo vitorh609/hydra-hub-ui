@@ -1,0 +1,94 @@
+.app-table-card {
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  box-shadow: var(--shadow-sm);
+}
+
+.app-table-card.is-frameless {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+}
+
+.table {
+  margin-bottom: 0;
+}
+
+.table thead th {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--text-2);
+}
+
+.table tbody tr:hover {
+  background: color-mix(in srgb, var(--primary) 6%, transparent);
+}
+
+.table tbody tr.is-selected {
+  background: color-mix(in srgb, var(--primary) 10%, transparent);
+}
+
+.table-col-select {
+  width: 44px;
+}
+
+.table-action-trigger {
+  padding: 0.35rem;
+}
+
+.table-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1rem 1.5rem 1.5rem;
+  border-top: 1px solid var(--border);
+}
+
+.table-footer-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.table-footer-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.table-pagination {
+  display: inline-flex;
+  gap: 0.5rem;
+}
+
+.table-pagination .btn {
+  padding: 0.35rem;
+}
+
+.dropdown-menu {
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+}
+
+.dropdown-menu.show {
+  display: block;
+}
+
+.dropdown-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-1);
+}
+
+.dropdown-item:hover {
+  background: var(--surface-2);
+}
+
+.table-action-danger {
+  color: var(--danger);
+}

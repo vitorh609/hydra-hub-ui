@@ -1,0 +1,25 @@
+<div class="billing-toggle" role="group" aria-label="Billing cycle">
+  <button
+    type="button"
+    class="toggle-option"
+    [class.active]="value === 'MONTHLY'"
+    (click)="setValue('MONTHLY')"
+  >
+    Monthly
+  </button>
+
+  <button type="button" class="toggle-switch" (click)="setValue(isYearly ? 'MONTHLY' : 'YEARLY')">
+    <span class="toggle-track" [class.is-yearly]="isYearly">
+      <span class="toggle-thumb"></span>
+    </span>
+  </button>
+
+  <button
+    type="button"
+    class="toggle-option"
+    [class.active]="value === 'YEARLY'"
+    (click)="setValue('YEARLY')"
+  >
+    Yearly
+  </button>
+</div>

@@ -1,0 +1,28 @@
+<div class="notes-search">
+  <app-icon name="search" [size]="16"></app-icon>
+  <input
+    type="text"
+    class="form-control app-input"
+    placeholder="Search Notes"
+    [formControl]="searchCtrl"
+  />
+</div>
+
+<div class="notes-list-header">
+  <h6 class="mb-0">All Notes</h6>
+</div>
+
+@if (notes().length === 0) {
+  <div class="notes-empty app-muted">No notes found.</div>
+} @else {
+  <div class="notes-items">
+    @for (note of notes(); track note.id) {
+      <app-note-item
+        [note]="note"
+        [selected]="note.id === selectedId()"
+        (select)="selectNote($event)"
+        (remove)="deleteNote($event)"
+      ></app-note-item>
+    }
+  </div>
+}

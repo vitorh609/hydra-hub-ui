@@ -1,0 +1,33 @@
+<!-- <section class="pricing-hero">
+  <div>
+    <div class="pricing-breadcrumb app-muted">Dashboard • Pricing</div>
+    <h2 class="mb-0">Pricing</h2>
+  </div>
+  <div class="pricing-hero-illustration" aria-hidden="true">
+    <svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">
+      <rect x="18" y="22" width="120" height="74" rx="16" />
+      <rect x="40" y="40" width="76" height="10" rx="5" />
+      <rect x="40" y="58" width="56" height="10" rx="5" />
+      <circle cx="156" cy="66" r="18" />
+    </svg>
+  </div>
+</section> -->
+
+<section class="pricing-content">
+  <div class="pricing-title-block">
+    <h3>Flexible Plans Tailored to Fit Your Community's Unique Needs!</h3>
+    <app-billing-toggle [value]="billing()" (valueChange)="setBilling($event)"></app-billing-toggle>
+  </div>
+
+  <div class="row g-4">
+    @for (plan of plans(); track plan.id) {
+      <div class="col-12 col-md-6 col-lg-4">
+        <app-pricing-card
+          [plan]="plan"
+          [billing]="billing()"
+          (choose)="onChoose($event)"
+        ></app-pricing-card>
+      </div>
+    }
+  </div>
+</section>

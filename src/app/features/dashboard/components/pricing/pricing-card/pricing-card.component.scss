@@ -1,0 +1,84 @@
+.pricing-card {
+  display: block;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--surface-1);
+  box-shadow: var(--shadow-sm);
+}
+
+.pricing-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 1rem;
+}
+
+.pricing-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: color-mix(in srgb, var(--primary) 18%, var(--surface-2));
+  color: var(--primary);
+}
+
+.pricing-badge {
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  background: color-mix(in srgb, var(--warning) 20%, transparent);
+  color: var(--warning);
+}
+
+.pricing-title {
+  font-weight: 700;
+  font-size: 1rem;
+  color: var(--text-1);
+}
+
+.pricing-price {
+  margin-top: 0.6rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: baseline;
+  gap: 0.35rem;
+}
+
+.pricing-amount {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+.pricing-suffix {
+  color: var(--text-2);
+  font-size: 0.9rem;
+}
+
+.pricing-features {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.pricing-features li {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--text-2);
+}
+
+.pricing-features li.is-included {
+  color: var(--text-1);
+}
+
+.pricing-features app-icon {
+  color: inherit;
+}

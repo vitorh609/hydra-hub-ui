@@ -1,0 +1,38 @@
+<app-card padding="p-4">
+  <div class="d-flex align-items-center justify-content-between mb-3">
+    <div>
+      <h5 class="mb-1">Products Performance</h5>
+      <div class="app-muted small">Top performers</div>
+    </div>
+    <button class="btn btn-sm btn-outline-light app-btn-outline">View All</button>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-dark table-borderless align-middle app-table">
+      <thead>
+        <tr class="app-muted">
+          <th>Product</th>
+          <th>Category</th>
+          <th>Sales</th>
+          <th>Stock</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        @for (product of products; track product.name) {
+          <tr>
+            <td class="fw-semibold">{{ product.name }}</td>
+            <td>{{ product.category }}</td>
+            <td>{{ product.sales }}</td>
+            <td>{{ product.stock }}</td>
+            <td>
+              <app-badge [tone]="product.status === 'Active' ? 'success' : 'warning'">
+                {{ product.status }}
+              </app-badge>
+            </td>
+          </tr>
+        }
+      </tbody>
+    </table>
+  </div>
+</app-card>

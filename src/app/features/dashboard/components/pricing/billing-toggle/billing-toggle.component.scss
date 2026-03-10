@@ -1,0 +1,59 @@
+.billing-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.35rem 0.6rem;
+  border-radius: 999px;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+}
+
+.toggle-option {
+  background: transparent;
+  border: none;
+  color: var(--text-2);
+  font-weight: 600;
+  padding: 0.3rem 0.5rem;
+  transition: color 0.2s ease;
+}
+
+.toggle-option.active {
+  color: var(--text-1);
+}
+
+.toggle-switch {
+  background: transparent;
+  border: none;
+  padding: 0;
+}
+
+.toggle-track {
+  display: inline-flex;
+  align-items: center;
+  width: 46px;
+  height: 24px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--primary) 18%, var(--surface-2));
+  border: 1px solid var(--border);
+  padding: 2px;
+  transition: background 0.2s ease;
+}
+
+.toggle-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 999px;
+  background: var(--surface-1);
+  box-shadow: var(--shadow-sm);
+  transform: translateX(0);
+  transition: transform 0.2s ease;
+}
+
+.toggle-track.is-yearly .toggle-thumb {
+  transform: translateX(20px);
+}
+
+.toggle-switch:focus-visible .toggle-track {
+  outline: none;
+  box-shadow: 0 0 0 0.2rem color-mix(in srgb, var(--primary) 25%, transparent);
+}

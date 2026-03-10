@@ -1,0 +1,19 @@
+.chart-placeholder {
+  background: var(--surface-2);
+  border: 1px dashed var(--border);
+  border-radius: 12px;
+  min-height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.chart-lines {
+  position: absolute;
+  inset: 20% 10% 20% 10%;
+  background: linear-gradient(135deg, rgba(93, 135, 255, 0.6), rgba(19, 222, 185, 0.6));
+  border-radius: 12px;
+  opacity: 0.3;
+}

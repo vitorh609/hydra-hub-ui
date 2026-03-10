@@ -1,0 +1,13 @@
+<div class="preview-card">
+  @if (title) {
+    <h6 class="preview-title">{{ title }}</h6>
+  }
+
+  <article class="paper-sheet">
+    @if (sanitizedHtml.trim().length > 0) {
+      <div class="doc" [innerHTML]="sanitizedHtml"></div>
+    } @else {
+      <div class="doc-placeholder app-muted">Your document preview appears here.</div>
+    }
+  </article>
+</div>

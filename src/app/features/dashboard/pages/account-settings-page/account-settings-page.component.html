@@ -1,0 +1,56 @@
+<section class="account-hero">
+  <div>
+    <div class="account-breadcrumb app-muted">Home • Account Setting</div>
+    <h2 class="mb-0">Account Setting</h2>
+  </div>
+  <div class="account-hero-illustration" aria-hidden="true">
+    <svg viewBox="0 0 200 120" xmlns="http://www.w3.org/2000/svg">
+      <rect x="16" y="24" width="120" height="72" rx="14" />
+      <circle cx="156" cy="46" r="16" />
+      <rect x="40" y="44" width="68" height="10" rx="5" />
+      <rect x="40" y="62" width="52" height="10" rx="5" />
+      <rect x="146" y="74" width="28" height="20" rx="8" />
+    </svg>
+  </div>
+</section>
+
+<app-card padding="p-4" class="account-settings-card">
+  <app-account-settings-tabs
+    [tabs]="tabs"
+    [active]="activeTab()"
+    (activeChange)="onTabChange($event)"
+  ></app-account-settings-tabs>
+
+  <div class="account-tab-body">
+    @switch (activeTab()) {
+      @case ('Account') {
+        <form class="account-form" [formGroup]="form" (ngSubmit)="onSubmit()">
+          <div class="row g-4">
+            <div class="col-12 col-lg-6">
+              <app-profile-photo-card [form]="profileForm"></app-profile-photo-card>
+            </div>
+            <div class="col-12 col-lg-6">
+              <app-change-password-card
+                [form]="passwordForm"
+                [submitted]="submitted()"
+              ></app-change-password-card>
+            </div>
+            <div class="col-12">
+              <app-personal-details-card
+                [form]="detailsForm"
+                [locations]="locationOptions"
+                [currencies]="currencyOptions"
+                [submitted]="submitted()"
+              ></app-personal-details-card>
+            </div>
+          </div>
+
+          <app-settings-actions-bar (cancel)="onCancel()"></app-settings-actions-bar>
+        </form>
+      }
+      @default {
+        <div class="account-placeholder app-muted">Coming soon</div>
+      }
+    }
+  </div>
+</app-card>

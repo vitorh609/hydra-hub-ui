@@ -1,0 +1,56 @@
+.pricing-hero {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 2rem 2.5rem;
+  border-radius: var(--card-radius);
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+  margin-bottom: 1.5rem;
+}
+
+.pricing-breadcrumb {
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
+}
+
+.pricing-hero-illustration svg {
+  width: 200px;
+  height: 120px;
+  fill: var(--surface-2);
+  stroke: var(--border);
+  stroke-width: 2px;
+}
+
+.pricing-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.pricing-title-block {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.pricing-title-block h3 {
+  max-width: 640px;
+  margin: 0;
+}
+
+@media (max-width: 767.98px) {
+  .pricing-hero {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .pricing-hero-illustration svg {
+    width: 160px;
+    height: 100px;
+  }
+}

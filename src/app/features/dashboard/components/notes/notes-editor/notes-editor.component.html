@@ -1,0 +1,63 @@
+<div class="notes-editor-header">
+  <button
+    class="notes-editor-left notes-menu-toggle"
+    type="button"
+    aria-label="Toggle notes list"
+    title="Notas"
+    (click)="onToggleList()"
+  >
+    <app-icon name="menu" [size]="18"></app-icon>
+  </button>
+  <button class="btn btn-primary" type="button" (click)="addNote()">Add Notes</button>
+</div>
+
+<div class="notes-divider-horizontal"></div>
+
+@if (selectedNote(); as note) {
+  <div class="notes-editor-body">
+    <div class="notes-section">
+      <h6 class="mb-3">Edit Note</h6>
+      <form [formGroup]="form" class="notes-form">
+
+        <div class="col-12 col-md-12">
+          <app-input
+            id="notes-title"
+            label="Title"
+            type="text"
+            formControlName="title"
+            [placeholder]="'Note title'"
+          ></app-input>
+        </div>
+
+        <label class="notes-label mt-3" for="notes-content">Notes</label>
+        <textarea
+          id="notes-content"
+          rows="8"
+          class="form-control app-input notes-textarea"
+          formControlName="content"
+          placeholder="Write your note here..."
+        ></textarea>
+      </form>
+    </div>
+
+    <div class="notes-section">
+      <h6 class="mb-3">Change Note Color</h6>
+      <div class="notes-swatches">
+        @for (color of colors; track color) {
+          <button
+            type="button"
+            class="note-swatch note-swatch-{{ color }}"
+            [class.is-selected]="note.color === color"
+            (click)="setColor(color)"
+          >
+            @if (note.color === color) {
+              <app-icon name="check" [size]="14"></app-icon>
+            }
+          </button>
+        }
+      </div>
+    </div>
+  </div>
+} @else {
+  <div class="notes-empty app-muted">Select a note to start editing.</div>
+}

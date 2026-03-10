@@ -1,0 +1,46 @@
+.rich-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--text-2);
+  font-size: 0.85rem;
+}
+
+.rich-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.rich-toolbar .app-icon-btn {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  color: var(--text-1);
+}
+
+.rich-editor {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 0.75rem 1rem;
+  color: var(--text-1);
+}
+
+.rich-editable {
+  outline: none;
+  min-height: 160px;
+}
+
+.rich-editable:empty::before {
+  content: attr(data-placeholder);
+  color: var(--text-2);
+}
+
+.rich-underline {
+  text-decoration: underline;
+}
+
+:host(.is-disabled) .rich-editor {
+  opacity: 0.7;
+  pointer-events: none;
+}

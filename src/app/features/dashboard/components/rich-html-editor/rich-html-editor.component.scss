@@ -1,0 +1,140 @@
+:host {
+  display: block;
+}
+
+.editor-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--text-2);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.editor-shell {
+  background: var(--surface-1);
+  border: 1px solid var(--border);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+}
+
+.editor-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.65rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface-2);
+}
+
+.toolbar-btn {
+  min-width: 2.1rem;
+  height: 2rem;
+  padding: 0 0.55rem;
+  font-size: 0.8rem;
+  line-height: 1;
+}
+
+.toolbar-btn:hover:not(:disabled) {
+  background: var(--interactive-hover-bg);
+  border-color: var(--interactive-hover-border);
+  color: var(--interactive-hover-fg);
+}
+
+.toolbar-btn:active:not(:disabled) {
+  background: var(--interactive-active-bg);
+  border-color: var(--interactive-active-border);
+  color: var(--interactive-active-fg);
+}
+
+.toolbar-btn:disabled {
+  opacity: 0.55;
+}
+
+.toolbar-underline {
+  text-decoration: underline;
+}
+
+.toolbar-select {
+  width: auto;
+  min-width: 112px;
+  border-radius: 10px;
+  border-color: var(--border);
+  background: var(--surface-1);
+  color: var(--text-1);
+}
+
+.toolbar-select:focus {
+  border-color: color-mix(in srgb, var(--primary) 50%, var(--border));
+  box-shadow: 0 0 0 0.2rem color-mix(in srgb, var(--primary) 18%, transparent);
+}
+
+.toolbar-divider {
+  width: 1px;
+  height: 1.4rem;
+  background: var(--border);
+  margin: 0 0.2rem;
+}
+
+.editor-body {
+  position: relative;
+  padding: 1rem;
+  background: var(--surface-1);
+}
+
+.editor-editable {
+  outline: none;
+  color: var(--text-1);
+  min-height: var(--editor-min-height, 320px);
+}
+
+.editor-editable:focus {
+  outline: none;
+}
+
+.editor-body.empty .editor-editable::before {
+  content: attr(data-placeholder);
+  color: var(--text-2);
+  pointer-events: none;
+}
+
+.editor-editable :is(h1, h2, h3) {
+  color: var(--text-1);
+  line-height: 1.25;
+  margin: 0.75rem 0 0.5rem;
+}
+
+.editor-editable h1 {
+  font-size: 1.85rem;
+}
+
+.editor-editable h2 {
+  font-size: 1.55rem;
+}
+
+.editor-editable h3 {
+  font-size: 1.3rem;
+}
+
+.editor-editable p {
+  margin: 0.45rem 0;
+  color: var(--text-1);
+}
+
+.editor-editable :is(ul, ol) {
+  margin: 0.55rem 0;
+  padding-left: 1.35rem;
+}
+
+.editor-editable a {
+  color: var(--primary);
+  text-decoration: underline;
+}
+
+:host(.is-disabled) {
+  opacity: 0.75;
+}
+
+:host(.is-disabled) .editor-shell {
+  pointer-events: none;
+}
