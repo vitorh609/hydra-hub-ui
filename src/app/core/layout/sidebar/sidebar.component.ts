@@ -61,7 +61,10 @@ export class SidebarComponent {
     },
     {
       title: 'Apps',
-      items: [{ label: 'Notes', icon: 'file-text', route: '/apps/notes' }],
+      items: [
+        { label: 'Notes', icon: 'file-text', route: '/apps/notes' },
+        { label: 'Tickets', icon: 'ticket', route: '/tickets' },
+      ],
     },
     {
       title: 'Pages',

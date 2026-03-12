@@ -1,27 +1,7 @@
 .notes-hero {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1.5rem;
-  padding: 2rem 2.5rem;
-  border-radius: var(--card-radius);
-  background: var(--surface-1);
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow-sm);
+  --page-hero-illustration-width: 180px;
+  --page-hero-illustration-height: 120px;
   margin-bottom: 1.5rem;
-}
-
-.notes-breadcrumb {
-  font-size: 0.85rem;
-  margin-bottom: 0.5rem;
-}
-
-.notes-hero-illustration svg {
-  width: 180px;
-  height: 120px;
-  fill: var(--surface-2);
-  stroke: var(--border);
-  stroke-width: 2px;
 }
 
 .notes-card {
@@ -96,11 +76,6 @@
 }
 
 @media (max-width: 767.98px) {
-  .notes-hero {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
   .notes-hero-illustration svg {
     width: 140px;
     height: 92px;

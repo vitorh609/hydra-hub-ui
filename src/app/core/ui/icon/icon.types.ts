@@ -20,6 +20,7 @@ export type AppIconName =
   | 'sun'
   | 'moon'
   | 'file-text'
+  | 'ticket'
   | 'trash'
   | 'check'
   | 'chevron-left'
@@ -56,6 +57,7 @@ export const iconSources: Record<AppIconName, string> = {
   sun: 'assets/icons/sun.svg',
   moon: 'assets/icons/moon.svg',
   'file-text': 'assets/icons/file-text.svg',
+  ticket: 'assets/icons/ticket.svg',
   trash: 'assets/icons/trash.svg',
   check: 'assets/icons/check.svg',
   'chevron-left': 'assets/icons/chevron-left.svg',

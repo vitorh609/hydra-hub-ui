@@ -1,27 +1,7 @@
 .account-hero {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1.5rem;
-  padding: 2rem 2.5rem;
-  border-radius: var(--card-radius);
-  background: var(--surface-1);
-  border: 1px solid var(--border);
-  box-shadow: var(--shadow-sm);
+  --page-hero-illustration-width: 200px;
+  --page-hero-illustration-height: 120px;
   margin-bottom: 1.5rem;
-}
-
-.account-breadcrumb {
-  font-size: 0.85rem;
-  margin-bottom: 0.5rem;
-}
-
-.account-hero-illustration svg {
-  width: 200px;
-  height: 120px;
-  fill: var(--surface-2);
-  stroke: var(--border);
-  stroke-width: 2px;
 }
 
 .account-settings-card {
@@ -44,11 +24,6 @@
 }
 
 @media (max-width: 767.98px) {
-  .account-hero {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
   .account-hero-illustration svg {
     width: 160px;
     height: 100px;

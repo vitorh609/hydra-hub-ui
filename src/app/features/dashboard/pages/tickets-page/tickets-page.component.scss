@@ -1,0 +1,19 @@
+:host {
+  display: block;
+}
+
+.tickets-hero {
+  --page-hero-illustration-width: 260px;
+  --page-hero-illustration-height: 146px;
+}
+
+.tickets-hero__copy {
+  max-width: 32rem;
+}
+
+@media (max-width: 991.98px) {
+  .tickets-hero__illustration svg {
+    width: 196px;
+    height: 110px;
+  }
+}

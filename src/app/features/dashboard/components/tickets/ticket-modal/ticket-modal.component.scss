@@ -1,0 +1,40 @@
+:host {
+  display: block;
+}
+
+.ticket-modal__subtitle {
+  color: var(--text-2);
+  font-size: 0.9rem;
+}
+
+.ticket-modal__form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.ticket-modal__textarea,
+.ticket-modal__control {
+  background: var(--surface-2);
+  border-color: var(--border);
+  color: var(--text-1);
+}
+
+.ticket-modal__textarea::placeholder,
+.ticket-modal__control::placeholder {
+  color: var(--text-2);
+}
+
+.ticket-modal__textarea:focus,
+.ticket-modal__control:focus {
+  background: var(--surface-1);
+  border-color: color-mix(in srgb, var(--primary) 45%, var(--border));
+  box-shadow: 0 0 0 0.2rem color-mix(in srgb, var(--primary) 14%, transparent);
+  color: var(--text-1);
+}
+
+.ticket-modal__error {
+  margin-top: 0.35rem;
+  color: var(--danger);
+  font-size: 0.82rem;
+}

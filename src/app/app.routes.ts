@@ -7,6 +7,7 @@ import { ShopPageComponent } from './features/dashboard/pages/shop-page/shop-pag
 import { AccountSettingsPageComponent } from './features/dashboard/pages/account-settings-page/account-settings-page.component';
 import { PricingPageComponent } from './features/dashboard/pages/pricing-page/pricing-page.component';
 import { DocumentsPageComponent } from './features/dashboard/pages/documents-page/documents-page.component';
+import { TicketsPageComponent } from './features/dashboard/pages/tickets-page/tickets-page.component';
 
 export const routes: Routes = [
   {
@@ -45,5 +46,9 @@ export const routes: Routes = [
   {
     path: 'documents',
     component: DocumentsPageComponent,
+  },
+  {
+    path: 'tickets',
+    component: TicketsPageComponent,
   },
 ];

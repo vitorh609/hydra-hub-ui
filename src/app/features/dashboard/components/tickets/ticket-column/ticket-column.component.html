@@ -1,0 +1,21 @@
+<section class="ticket-column" [attr.data-status]="status" (dragover)="allowDrop($event)" (drop)="drop($event)">
+  <header class="ticket-column__header">
+    <div>
+      <p class="ticket-column__eyebrow mb-1">{{ title }}</p>
+      <h5 class="mb-0">{{ tickets.length }} tickets</h5>
+    </div>
+    <span class="ticket-column__badge">{{ title }}</span>
+  </header>
+
+  <div class="ticket-column__list">
+    @if (tickets.length) {
+      @for (ticket of tickets; track ticket.id) {
+        <app-ticket-card [ticket]="ticket" (openTicket)="openTicket($event)"></app-ticket-card>
+      }
+    } @else {
+      <div class="ticket-column__empty">
+        <span>Drop a ticket here</span>
+      </div>
+    }
+  </div>
+</section>

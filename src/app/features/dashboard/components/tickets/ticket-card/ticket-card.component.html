@@ -1,0 +1,23 @@
+<article
+  class="ticket-card"
+  draggable="true"
+  (dragstart)="onDragStart($event)"
+  (click)="open()"
+  (keydown.enter)="open()"
+  (keydown.space)="open()"
+  tabindex="0"
+>
+  <div class="ticket-card__top">
+    <h6 class="ticket-card__title mb-0">{{ ticket.title }}</h6>
+    <span class="ticket-card__icon">
+      <app-icon name="edit" [size]="16"></app-icon>
+    </span>
+  </div>
+
+  <p class="ticket-card__description mb-0">{{ ticket.description }}</p>
+
+  <div class="ticket-card__meta">
+    <span class="ticket-card__meta-label">Due</span>
+    <span class="ticket-card__meta-value">{{ ticket.dueDate | date: 'MMM d, y' }}</span>
+  </div>
+</article>

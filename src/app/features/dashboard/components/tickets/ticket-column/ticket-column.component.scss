@@ -1,0 +1,88 @@
+:host {
+  display: block;
+  min-width: 0;
+}
+
+.ticket-column {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  min-height: 100%;
+  padding: 1rem;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border);
+  background: var(--surface-1);
+  box-shadow: var(--shadow-sm);
+}
+
+.ticket-column__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.25rem;
+}
+
+.ticket-column__eyebrow {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-2);
+}
+
+.ticket-column__badge {
+  padding: 0.3rem 0.65rem;
+  border-radius: 999px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  border: 1px solid transparent;
+}
+
+.ticket-column__list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.9rem;
+  min-height: 16rem;
+}
+
+.ticket-column__empty {
+  min-height: 8rem;
+  display: grid;
+  place-items: center;
+  padding: 1.25rem;
+  border-radius: calc(var(--radius-lg) - 4px);
+  border: 1px dashed color-mix(in srgb, var(--border) 80%, transparent);
+  background: color-mix(in srgb, var(--surface-2) 84%, transparent);
+  color: var(--text-2);
+  text-align: center;
+}
+
+.ticket-column[data-status='todo'] {
+  background: color-mix(in srgb, var(--primary) 8%, var(--surface-1));
+}
+
+.ticket-column[data-status='todo'] .ticket-column__badge {
+  background: color-mix(in srgb, var(--primary) 14%, transparent);
+  color: var(--primary);
+  border-color: color-mix(in srgb, var(--primary) 28%, var(--border));
+}
+
+.ticket-column[data-status='in_progress'] {
+  background: color-mix(in srgb, var(--warning) 8%, var(--surface-1));
+}
+
+.ticket-column[data-status='in_progress'] .ticket-column__badge {
+  background: color-mix(in srgb, var(--warning) 16%, transparent);
+  color: color-mix(in srgb, var(--warning) 72%, var(--text-1));
+  border-color: color-mix(in srgb, var(--warning) 28%, var(--border));
+}
+
+.ticket-column[data-status='done'] {
+  background: color-mix(in srgb, var(--success) 8%, var(--surface-1));
+}
+
+.ticket-column[data-status='done'] .ticket-column__badge {
+  background: color-mix(in srgb, var(--success) 16%, transparent);
+  color: color-mix(in srgb, var(--success) 72%, var(--text-1));
+  border-color: color-mix(in srgb, var(--success) 28%, var(--border));
+}

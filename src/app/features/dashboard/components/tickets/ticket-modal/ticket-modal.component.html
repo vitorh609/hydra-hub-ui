@@ -1,0 +1,86 @@
+<div class="modal-header">
+  <div>
+    <h5 class="modal-title mb-1">{{ isCreateMode ? 'Add Ticket' : 'Ticket Details' }}</h5>
+    <p class="ticket-modal__subtitle mb-0">
+      {{ isCreateMode ? 'Create a new task for the board.' : 'Update the selected ticket details.' }}
+    </p>
+  </div>
+  <button class="btn-close" type="button" aria-label="Close" (click)="cancel()"></button>
+</div>
+
+<div class="modal-body">
+  <form class="ticket-modal__form" [formGroup]="form">
+    <app-input
+      id="ticket-title"
+      label="Title"
+      formControlName="title"
+      placeholder="Enter ticket title"
+    ></app-input>
+    @if (hasError('title')) {
+      <div class="ticket-modal__error">Title is required.</div>
+    }
+
+    <div>
+      <label class="form-label" for="ticket-description">Description</label>
+      <textarea
+        id="ticket-description"
+        class="form-control ticket-modal__textarea"
+        rows="5"
+        formControlName="description"
+        placeholder="Describe the work to be done"
+      ></textarea>
+      @if (hasError('description')) {
+        <div class="ticket-modal__error">Description is required.</div>
+      }
+    </div>
+
+    <div class="row g-3">
+      <div class="col-12 col-md-6">
+        <label class="form-label" for="ticket-due-date">Due Date</label>
+        <input
+          id="ticket-due-date"
+          class="form-control ticket-modal__control"
+          type="date"
+          formControlName="dueDate"
+        />
+        @if (hasError('dueDate')) {
+          <div class="ticket-modal__error">Due date is required.</div>
+        }
+      </div>
+
+      <div class="col-12 col-md-6">
+        <label class="form-label" for="ticket-status">Status</label>
+        <select
+          id="ticket-status"
+          class="form-select ticket-modal__control"
+          formControlName="status"
+        >
+          @for (option of statusOptions; track option.value) {
+            <option [value]="option.value">{{ option.label }}</option>
+          }
+        </select>
+        @if (hasError('status')) {
+          <div class="ticket-modal__error">Status is required.</div>
+        }
+      </div>
+    </div>
+
+    <div>
+      <label class="form-label" for="ticket-created-at">Created At</label>
+      <input
+        id="ticket-created-at"
+        class="form-control ticket-modal__control"
+        type="text"
+        [value]="form.controls.createdAt.value ? (form.controls.createdAt.value | date: 'medium') : 'Generated on save'"
+        disabled
+      />
+    </div>
+  </form>
+</div>
+
+<div class="modal-footer">
+  <button class="btn app-btn-outline" type="button" (click)="cancel()">Cancel</button>
+  <button class="btn btn-primary" type="button" (click)="save()">
+    {{ isCreateMode ? 'Create Ticket' : 'Save Changes' }}
+  </button>
+</div>

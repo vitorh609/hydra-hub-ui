@@ -1,0 +1,29 @@
+<section class="ticket-board">
+  <header class="ticket-board__header">
+    <div>
+      <p class="ticket-board__eyebrow mb-1">Workflow</p>
+      <h4 class="mb-0">Kanban overview</h4>
+    </div>
+    <div class="ticket-board__summary-group">
+      <button class="btn btn-primary ticket-board__action" type="button" (click)="openCreateModal()">
+        Add Ticket
+      </button>
+      <div class="ticket-board__summary">
+        <span class="ticket-board__summary-value">{{ totalTickets() }}</span>
+        <span class="ticket-board__summary-label">active tickets</span>
+      </div>
+    </div>
+  </header>
+
+  <div class="ticket-board__grid">
+    @for (column of columns; track column.status) {
+      <app-ticket-column
+        [title]="column.title"
+        [status]="column.status"
+        [tickets]="ticketsByStatus()[column.status]"
+        (ticketDropped)="handleDrop($event)"
+        (ticketOpened)="openTicket($event)"
+      ></app-ticket-column>
+    }
+  </div>
+</section>
