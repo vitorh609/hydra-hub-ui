@@ -56,15 +56,15 @@
 .ticket-board__grid {
   display: grid;
   gap: 1rem;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(320px, 1fr));
   align-items: stretch;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 0.5rem;
+  overscroll-behavior-x: contain;
 }
 
 @media (max-width: 1199.98px) {
-  .ticket-board__grid {
-    grid-template-columns: 1fr;
-  }
-
   .ticket-board__summary {
     align-items: flex-start;
   }
