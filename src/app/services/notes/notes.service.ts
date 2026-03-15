@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 import type { Note } from '../../shared/models/notes.models';
 
@@ -10,7 +11,7 @@ export type UpdateNoteDto = Partial<Pick<Note, 'title' | 'content' | 'color'>>;
 @Injectable({ providedIn: 'root' })
 export class NotesService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = 'http://localhost:3000';
+  private readonly baseUrl = environment.apiBaseUrl;
   private readonly notesUrl = `${this.baseUrl}/notes`;
 
   list(): Observable<Note[]> {
