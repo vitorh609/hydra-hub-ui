@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 import type { CreateTicketDto } from '../../shared/models/create-ticket.dto';
 import type { Ticket, TicketStatus } from '../../shared/models/ticket.model';
@@ -9,7 +10,7 @@ import type { UpdateTicketDto } from '../../shared/models/update-ticket.dto';
 @Injectable({ providedIn: 'root' })
 export class TicketService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = 'http://localhost:3000';
+  private readonly baseUrl = environment.apiBaseUrl;
   private readonly ticketsUrl = `${this.baseUrl}/tickets`;
 
   list(): Observable<Ticket[]> {

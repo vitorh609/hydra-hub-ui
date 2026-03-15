@@ -1,12 +1,12 @@
 import {inject, Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {AccountSettingsCreate} from '../../shared/models/account-settings.models';
-import {Observable} from 'rxjs';
+import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class AccountService {
   private readonly http = inject(HttpClient);
-  private readonly baseUrl = 'http://localhost:3000';
+  private readonly baseUrl = environment.apiBaseUrl;
   private readonly accountUrl = `${this.baseUrl}/account-settings`;
 
   getAccountDetails(id: string) {
