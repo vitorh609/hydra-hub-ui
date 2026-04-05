@@ -68,7 +68,11 @@
 
     @if (tickets.length) {
       @for (ticket of tickets; track ticket.id) {
-        <app-ticket-card [ticket]="ticket" (openTicket)="openTicket($event)"></app-ticket-card>
+        <app-ticket-card
+          [ticket]="ticket"
+          (openTicket)="openTicket($event)"
+          (statusChanged)="onTicketStatusChanged($event)"
+        ></app-ticket-card>
       }
     } @else {
       <div class="ticket-column__empty">

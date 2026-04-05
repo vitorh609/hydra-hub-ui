@@ -26,6 +26,7 @@ export class TicketColumnComponent {
   @Output() ticketCreated = new EventEmitter<CreateTicketDto>();
   @Output() ticketDropped = new EventEmitter<{ ticketId: string; targetStatus: TicketStatus }>();
   @Output() ticketOpened = new EventEmitter<string>();
+  @Output() ticketStatusChanged = new EventEmitter<{ ticketId: string; targetStatus: TicketStatus }>();
 
   readonly isCreating = signal(false);
   readonly submitted = signal(false);
@@ -60,6 +61,10 @@ export class TicketColumnComponent {
 
   openTicket(ticketId: string): void {
     this.ticketOpened.emit(ticketId);
+  }
+
+  onTicketStatusChanged(event: { ticketId: string; status: TicketStatus }): void {
+    this.ticketStatusChanged.emit({ ticketId: event.ticketId, targetStatus: event.status });
   }
 
   openInlineCreate(): void {

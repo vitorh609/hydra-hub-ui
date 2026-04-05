@@ -7,6 +7,39 @@
   (keydown.space)="open()"
   tabindex="0"
 >
+  <div class="ticket-card__status-group">
+    <button
+      class="ticket-card__status ticket-card__status-trigger"
+      type="button"
+      [attr.data-status]="ticket.status"
+      [class.is-visible]="isStatusMenuOpen()"
+      [attr.aria-expanded]="isStatusMenuOpen()"
+      (click)="toggleStatusMenu($event)"
+    >
+      {{ statusLabel }}
+    </button>
+
+    <div
+      class="ticket-card__status-options"
+      [class.is-open]="isStatusMenuOpen()"
+      [attr.aria-hidden]="!isStatusMenuOpen()"
+      (click)="$event.stopPropagation()"
+    >
+      @for (option of statusOptions; track option.value) {
+        @if (option.value !== ticket.status) {
+          <button
+            class="ticket-card__status ticket-card__status-option"
+            type="button"
+            [attr.data-status]="option.value"
+            (click)="updateStatus(option.value, $event)"
+          >
+            {{ option.label }}
+          </button>
+        }
+      }
+    </div>
+  </div>
+
   <div class="ticket-card__top">
     <h6 class="ticket-card__title mb-0">{{ ticket.title }}</h6>
     <span class="ticket-card__icon">
