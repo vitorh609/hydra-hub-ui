@@ -4,10 +4,68 @@
       <p class="ticket-column__eyebrow mb-1">{{ title }}</p>
       <h5 class="mb-0">{{ tickets.length }} tickets</h5>
     </div>
-    <span class="ticket-column__badge">{{ title }}</span>
+    <div class="ticket-column__actions">
+      <button
+        class="ticket-column__add-btn"
+        type="button"
+        [attr.aria-expanded]="isCreating()"
+        (click)="openInlineCreate()"
+      >
+        + Add
+      </button>
+      <span class="ticket-column__badge">{{ title }}</span>
+    </div>
   </header>
 
   <div class="ticket-column__list">
+    @if (isCreating()) {
+      <form class="ticket-column__composer" [formGroup]="form" (ngSubmit)="submitInlineCreate()">
+        <app-input
+          id="ticket-inline-title-{{ status }}"
+          label="Title"
+          formControlName="title"
+          placeholder="Enter ticket title"
+        ></app-input>
+        @if (hasError('title')) {
+          <div class="ticket-column__error">Title is required.</div>
+        }
+
+        <div>
+          <label class="form-label" for="ticket-inline-description-{{ status }}">Description</label>
+          <textarea
+            id="ticket-inline-description-{{ status }}"
+            class="form-control ticket-column__textarea"
+            rows="3"
+            formControlName="description"
+            placeholder="Describe the work to be done"
+          ></textarea>
+          @if (hasError('description')) {
+            <div class="ticket-column__error">Description is required.</div>
+          }
+        </div>
+
+        <div>
+          <label class="form-label" for="ticket-inline-due-date-{{ status }}">Due date</label>
+          <input
+            id="ticket-inline-due-date-{{ status }}"
+            class="form-control ticket-column__control"
+            type="date"
+            formControlName="dueDate"
+          />
+          @if (hasError('dueDate')) {
+            <div class="ticket-column__error">Due date is required.</div>
+          }
+        </div>
+
+        <div class="ticket-column__composer-actions">
+          <button class="btn btn-sm app-btn-outline" type="button" (click)="cancelInlineCreate()">
+            Cancel
+          </button>
+          <button class="btn btn-sm btn-primary" type="submit">Save</button>
+        </div>
+      </form>
+    }
+
     @if (tickets.length) {
       @for (ticket of tickets; track ticket.id) {
         <app-ticket-card [ticket]="ticket" (openTicket)="openTicket($event)"></app-ticket-card>

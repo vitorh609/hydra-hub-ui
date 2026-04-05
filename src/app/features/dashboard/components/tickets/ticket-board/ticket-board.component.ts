@@ -2,6 +2,7 @@ import { Component, OnInit, computed, inject, signal } from '@angular/core';
 import { BsModalService } from 'ngx-bootstrap/modal';
 
 import { TicketService } from '../../../../../services/ticket/ticket.service';
+import type { CreateTicketDto } from '../../../../../shared/models/create-ticket.dto';
 import type { Ticket, TicketStatus } from '../../../../../shared/models/ticket.model';
 import { TicketColumnComponent } from '../ticket-column/ticket-column.component';
 import { TicketModalComponent } from '../ticket-modal/ticket-modal.component';
@@ -74,6 +75,12 @@ export class TicketBoardComponent implements OnInit {
     this.modalService.show(TicketModalComponent, {
       class: 'modal-lg modal-dialog-centered app-themed-modal',
       initialState: { ticketSelectedId: null, onSaved: () => this.loadTickets() },
+    });
+  }
+
+  createInlineTicket(payload: CreateTicketDto): void {
+    this.ticketService.create(payload).subscribe({
+      next: () => this.loadTickets(),
     });
   }
 

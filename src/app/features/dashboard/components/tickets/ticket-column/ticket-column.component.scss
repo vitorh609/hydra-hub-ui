@@ -41,6 +41,43 @@
   color: var(--text-2);
 }
 
+.ticket-column__actions {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.ticket-column__add-btn {
+  padding: 0.35rem 0.7rem;
+  border: 1px solid color-mix(in srgb, var(--border) 88%, transparent);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--surface-2) 88%, transparent);
+  color: var(--text-2);
+  font-size: 0.78rem;
+  font-weight: 600;
+  line-height: 1;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.ticket-column__add-btn:hover {
+  background: color-mix(in srgb, var(--surface-2) 55%, var(--surface-1));
+  border-color: color-mix(in srgb, var(--text-2) 22%, var(--border));
+  color: var(--text-1);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-sm);
+}
+
+.ticket-column__add-btn:focus-visible {
+  outline: none;
+  border-color: color-mix(in srgb, var(--primary) 45%, var(--border));
+  box-shadow: 0 0 0 0.2rem color-mix(in srgb, var(--primary) 18%, transparent);
+}
+
 .ticket-column__badge {
   padding: 0.3rem 0.65rem;
   border-radius: 999px;
@@ -54,6 +91,48 @@
   flex-direction: column;
   gap: 0.9rem;
   min-height: 16rem;
+}
+
+.ticket-column__composer {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 0.95rem;
+  border-radius: calc(var(--radius-lg) - 4px);
+  border: 1px solid color-mix(in srgb, var(--border) 82%, transparent);
+  background: color-mix(in srgb, var(--surface-1) 92%, var(--surface-2));
+  box-shadow: var(--shadow-sm);
+}
+
+.ticket-column__control,
+.ticket-column__textarea {
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  color: var(--text-1);
+}
+
+.ticket-column__control:focus,
+.ticket-column__textarea:focus {
+  border-color: color-mix(in srgb, var(--primary) 45%, var(--border));
+  box-shadow: 0 0 0 0.2rem color-mix(in srgb, var(--primary) 20%, transparent);
+}
+
+.ticket-column__textarea {
+  resize: vertical;
+  min-height: 5.5rem;
+}
+
+.ticket-column__composer-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+.ticket-column__error {
+  margin-top: 0.35rem;
+  color: var(--danger, #dc3545);
+  font-size: 0.78rem;
 }
 
 .ticket-column__empty {

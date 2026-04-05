@@ -21,6 +21,7 @@
         [title]="column.title"
         [status]="column.status"
         [tickets]="ticketsByStatus()[column.status]"
+        (ticketCreated)="createInlineTicket($event)"
         (ticketDropped)="handleDrop($event)"
         (ticketOpened)="openTicket($event)"
       ></app-ticket-column>
