@@ -1,0 +1,20 @@
+<div class="auth-social-buttons" role="group" aria-label="Social sign in">
+  @for (provider of providers; track provider.id) {
+    <button class="btn auth-social-button" type="button" (click)="onProviderClick(provider.id)">
+      <span class="auth-social-button__badge" [attr.data-provider]="provider.id">
+        @if (provider.iconPath) {
+          <img
+            class="auth-social-button__icon-image"
+            [src]="provider.iconPath"
+            [alt]="provider.id + ' icon'"
+            width="16"
+            height="16"
+          />
+        } @else {
+          {{ provider.shortLabel }}
+        }
+      </span>
+      <span>{{ provider.label }}</span>
+    </button>
+  }
+</div>

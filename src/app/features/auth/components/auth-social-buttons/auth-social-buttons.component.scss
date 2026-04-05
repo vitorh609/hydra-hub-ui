@@ -1,0 +1,66 @@
+.auth-social-buttons {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0.9rem;
+}
+
+.auth-social-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  width: 100%;
+  min-height: 2.7rem;
+  padding: 0.6rem 0.95rem;
+  border-radius: calc(var(--radius-lg) - 0.4rem);
+  border: 1px solid var(--border);
+  background: color-mix(in srgb, var(--surface-2) 80%, var(--surface-1));
+  color: var(--text-1);
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.auth-social-button:hover {
+  border-color: color-mix(in srgb, var(--primary) 34%, var(--border));
+  background: color-mix(in srgb, var(--primary) 10%, var(--surface-1));
+  transform: translateY(-1px);
+}
+
+.auth-social-button:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 0.2rem color-mix(in srgb, var(--primary) 18%, transparent);
+}
+
+.auth-social-button__badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.8rem;
+  height: 1.8rem;
+  border-radius: 999px;
+  font-size: 0.88rem;
+  font-weight: 700;
+  background: color-mix(in srgb, var(--surface-1) 55%, var(--surface-2));
+  color: var(--text-1);
+}
+
+.auth-social-button__icon-image {
+  display: block;
+  width: 1rem;
+  height: 1rem;
+}
+
+.auth-social-button__badge[data-provider='google'] {
+  background: color-mix(in srgb, var(--surface-1) 82%, var(--surface-2));
+}
+
+.auth-social-button__badge[data-provider='facebook'] {
+  background: color-mix(in srgb, var(--primary) 28%, var(--surface-2));
+  color: color-mix(in srgb, var(--text-1) 85%, var(--primary));
+  text-transform: lowercase;
+}

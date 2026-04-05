@@ -1,0 +1,45 @@
+<section class="auth-login-page">
+  <div class="auth-login-page__visual">
+    <div class="auth-login-page__brand">
+      <div class="auth-login-page__brand-mark">M</div>
+      <div>
+        <p class="auth-login-page__brand-kicker mb-1">Modernize UI</p>
+        <h2 class="auth-login-page__brand-title mb-0">Welcome back to your workspace</h2>
+      </div>
+    </div>
+
+    <div class="auth-login-page__hero">
+      <span class="auth-login-page__eyebrow">Authentication</span>
+      <h3 class="auth-login-page__headline">Clean sign-in, dashboard-grade polish, and full theme support.</h3>
+      <p class="auth-login-page__copy mb-0">
+        This dedicated layout keeps the login flow independent from the admin shell while preserving the visual language of the project.
+      </p>
+    </div>
+
+    <div class="auth-login-page__art" aria-hidden="true">
+      <span class="auth-login-page__orb auth-login-page__orb--primary"></span>
+      <span class="auth-login-page__orb auth-login-page__orb--secondary"></span>
+      <div class="auth-login-page__panel">
+        <div class="auth-login-page__panel-bar"></div>
+        <div class="auth-login-page__panel-grid">
+          <span></span>
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+
+    <ul class="auth-login-page__highlights">
+      @for (highlight of highlights; track highlight) {
+        <li>{{ highlight }}</li>
+      }
+    </ul>
+  </div>
+
+  <div class="auth-login-page__form-column">
+    <div class="auth-login-page__form-wrap">
+      <app-login-form></app-login-form>
+    </div>
+  </div>
+</section>

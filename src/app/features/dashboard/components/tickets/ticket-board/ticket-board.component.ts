@@ -80,6 +80,9 @@ export class TicketBoardComponent implements OnInit {
   private loadTickets(): void {
     this.ticketService.list().subscribe({
       next: (tickets) => this.tickets.set(tickets),
+      error: (error: unknown) => {
+        console.error('Failed to load tickets', error);
+      },
     });
   }
 

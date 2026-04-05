@@ -1,0 +1,82 @@
+<div class="login-card">
+  <div class="login-card__intro">
+    <h1 class="login-card__title">Sign in to your account</h1>
+  </div>
+
+  <app-auth-social-buttons></app-auth-social-buttons>
+  <app-auth-divider text="or sign in with"></app-auth-divider>
+
+  <form class="login-form" [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+    <div class="login-form__field">
+      <label class="form-label login-form__label" for="login-username">Login</label>
+      <input
+        id="login-username"
+        class="form-control app-input login-form__input"
+        type="email"
+        placeholder="Enter your email"
+        formControlName="login"
+        [class.is-invalid]="loginInvalid()"
+        autocomplete="username"
+      />
+      @if (loginInvalid()) {
+        <div class="login-form__error">Login is required.</div>
+      }
+    </div>
+
+    <div class="login-form__field">
+      <label class="form-label login-form__label" for="login-password">Password</label>
+      <div class="login-form__password-wrap">
+        <input
+          id="login-password"
+          class="form-control app-input login-form__input login-form__input--password"
+          [type]="showPassword() ? 'text' : 'password'"
+          placeholder="Enter your password"
+          formControlName="password"
+          [class.is-invalid]="passwordInvalid()"
+          autocomplete="current-password"
+        />
+        <button
+          class="btn login-form__password-toggle"
+          type="button"
+          [attr.aria-label]="showPassword() ? 'Hide password' : 'Show password'"
+          [attr.aria-pressed]="showPassword()"
+          (click)="togglePasswordVisibility()"
+        >
+          <app-icon [name]="showPassword() ? 'x' : 'eye'" [size]="18"></app-icon>
+        </button>
+      </div>
+      @if (passwordInvalid()) {
+        <div class="login-form__error">Password is required.</div>
+      }
+    </div>
+
+    @if (submitError(); as errorMessage) {
+      <div class="login-form__error login-form__error--submit">{{ errorMessage }}</div>
+    }
+
+    <div class="login-form__meta">
+      <div class="form-check login-form__checkbox">
+        <input
+          id="remember-device"
+          class="form-check-input"
+          type="checkbox"
+          formControlName="rememberDevice"
+        />
+        <label class="form-check-label" for="remember-device">Remember this Device</label>
+      </div>
+
+      <button class="btn login-form__text-link" type="button">Forgot Password?</button>
+    </div>
+
+    <button class="btn btn-primary login-form__submit" type="submit" [disabled]="isSubmitting()">
+      {{ isSubmitting() ? 'Signing In...' : 'Sign In' }}
+    </button>
+  </form>
+
+  <p class="login-card__footer mb-0">
+    New to Modernize?
+    <button class="btn login-form__text-link login-form__text-link--inline" type="button">
+      Create an account
+    </button>
+  </p>
+</div>

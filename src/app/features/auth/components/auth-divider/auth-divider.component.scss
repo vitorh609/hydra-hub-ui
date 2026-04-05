@@ -1,0 +1,17 @@
+.auth-divider {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  color: var(--text-2);
+  font-size: 0.875rem;
+}
+
+.auth-divider__line {
+  flex: 1;
+  height: 1px;
+  background: var(--border);
+}
+
+.auth-divider__label {
+  white-space: nowrap;
+}
