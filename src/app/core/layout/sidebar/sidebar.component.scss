@@ -61,23 +61,69 @@
   padding: 0.55rem 0.75rem;
   border-radius: 12px;
   color: var(--text-2);
-  transition: background 0.2s ease, color 0.2s ease;
+  transition:
+    background 0.24s ease,
+    color 0.24s ease,
+    transform 0.24s ease,
+    box-shadow 0.24s ease;
 }
 
 .nav-group-label {
   cursor: default;
 }
 
+.nav-group-toggle {
+  justify-content: space-between;
+}
+
+.nav-label {
+  flex: 1;
+}
+
+.nav-toggle-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-3, var(--text-2));
+  transition:
+    transform 0.28s ease,
+    color 0.24s ease;
+}
+
+.nav-toggle-icon.expanded {
+  transform: rotate(90deg);
+}
+
+.nav-children-wrapper {
+  display: grid;
+  grid-template-rows: 0fr;
+  opacity: 0;
+  transform: translateY(-0.35rem);
+  transition:
+    grid-template-rows 0.32s ease,
+    opacity 0.24s ease,
+    transform 0.32s ease;
+}
+
+.nav-children-wrapper.expanded {
+  grid-template-rows: 1fr;
+  opacity: 1;
+  transform: translateY(0);
+}
+
 .nav-children {
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
   margin-left: 2.25rem;
+  padding-top: 0.2rem;
 }
 
 .nav-child {
   padding: 0.45rem 0.75rem;
   font-size: 0.9rem;
+  transform-origin: left center;
 }
 
 .nav-button {
@@ -85,15 +131,28 @@
   border: none;
   text-align: left;
   width: 100%;
+  color: inherit;
 }
 
 .nav-item:hover {
   background: var(--interactive-hover-bg);
   color: var(--interactive-hover-fg);
+  transform: translateX(2px);
+}
+
+.nav-item:hover .nav-toggle-icon,
+.nav-group-toggle.active-parent .nav-toggle-icon {
+  color: currentColor;
 }
 
 .nav-item.active {
   background: var(--sidebar-active-bg);
+  color: var(--sidebar-active-fg);
+  box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--sidebar-active-fg) 8%, transparent);
+}
+
+.nav-group-toggle.active-parent {
+  background: color-mix(in srgb, var(--sidebar-active-bg) 72%, transparent);
   color: var(--sidebar-active-fg);
 }
 
@@ -113,5 +172,10 @@
 }
 
 .sidebar.collapsed .nav-item {
+  justify-content: center;
+  transform: none;
+}
+
+.sidebar.collapsed .nav-group-toggle {
   justify-content: center;
 }

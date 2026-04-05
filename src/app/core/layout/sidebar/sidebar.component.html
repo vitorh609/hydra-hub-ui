@@ -17,7 +17,45 @@
         }
         <div class="nav-items">
           @for (item of group.items; track item.label) {
-            @if (item.route) {
+            @if (item.children?.length) {
+              <button
+                type="button"
+                class="nav-item nav-button nav-group-toggle"
+                [class.active-parent]="hasActiveChild(item)"
+                [attr.aria-expanded]="isItemExpanded(item)"
+                (click)="toggleItem(item)"
+              >
+                <span class="nav-icon">
+                  <app-icon [name]="item.icon" [size]="20"></app-icon>
+                </span>
+                @if (!isCollapsed()) {
+                  <span class="nav-label">{{ item.label }}</span>
+                  <span class="nav-toggle-icon" [class.expanded]="isItemExpanded(item)">
+                    <app-icon name="chevron-right" [size]="16"></app-icon>
+                  </span>
+                }
+              </button>
+
+              @if (!isCollapsed()) {
+                <div class="nav-children-wrapper" [class.expanded]="isItemExpanded(item)">
+                  <div class="nav-children">
+                    @for (child of item.children; track child.label) {
+                      <a
+                        class="nav-item nav-child"
+                        [routerLink]="child.route"
+                        routerLinkActive="active"
+                        [routerLinkActiveOptions]="{ exact: false }"
+                      >
+                        <span class="nav-icon">
+                          <app-icon [name]="child.icon" [size]="18"></app-icon>
+                        </span>
+                        <span>{{ child.label }}</span>
+                      </a>
+                    }
+                  </div>
+                </div>
+              }
+            } @else if (item.route) {
               <a
                 class="nav-item"
                 [routerLink]="item.route"
@@ -38,24 +76,6 @@
                 </span>
                 @if (!isCollapsed()) {
                   <span>{{ item.label }}</span>
-                }
-              </div>
-            }
-
-            @if (item.children?.length && !isCollapsed()) {
-              <div class="nav-children">
-                @for (child of item.children; track child.label) {
-                  <a
-                    class="nav-item nav-child"
-                    [routerLink]="child.route"
-                    routerLinkActive="active"
-                    [routerLinkActiveOptions]="{ exact: false }"
-                  >
-                    <span class="nav-icon">
-                      <app-icon [name]="child.icon" [size]="18"></app-icon>
-                    </span>
-                    <span>{{ child.label }}</span>
-                  </a>
                 }
               </div>
             }
