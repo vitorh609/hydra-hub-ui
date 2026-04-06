@@ -76,6 +76,10 @@ export class SidebarComponent {
       ],
     },
     {
+      title: 'Integrations',
+      items: [{ label: 'ClickUp', icon: 'refresh', route: '/integrations/clickup' }],
+    },
+    {
       title: 'Prices',
       items: [{ label: 'Pricing', icon: 'credit-card', route: '/prices/pricing' }],
     },

@@ -1,0 +1,30 @@
+:host {
+  display: block;
+}
+
+.clickup-hero {
+  --page-hero-illustration-width: 280px;
+  --page-hero-illustration-height: 150px;
+  background:
+    radial-gradient(circle at top left, color-mix(in srgb, #ff02f0 20%, transparent), transparent 36%),
+    radial-gradient(circle at bottom left, color-mix(in srgb, #fc6d2d 18%, transparent), transparent 30%),
+    radial-gradient(circle at top right, color-mix(in srgb, #0091ff 18%, transparent), transparent 38%),
+    linear-gradient(135deg, var(--surface-1), color-mix(in srgb, #6647f0 12%, var(--surface-2)));
+}
+
+.clickup-hero__copy {
+  max-width: 36rem;
+}
+
+.clickup-hero__illustration img {
+  width: 280px;
+  height: 150px;
+  object-fit: contain;
+}
+
+@media (max-width: 991.98px) {
+  .clickup-hero__illustration img {
+    width: 220px;
+    height: 118px;
+  }
+}

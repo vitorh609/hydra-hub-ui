@@ -1,0 +1,369 @@
+@if (store.feedback(); as feedback) {
+  <div
+    class="alert clickup-alert mb-4"
+    [ngClass]="feedback.tone === 'success' ? 'alert-success' : 'alert-danger'"
+    role="alert"
+  >
+    <div>{{ feedback.message }}</div>
+    <button class="btn-close" type="button" aria-label="Close" (click)="store.clearFeedback()"></button>
+  </div>
+}
+
+<div class="row g-4">
+  <div class="col-12 col-xl-5">
+    <app-card padding="p-4" class="h-100">
+      <div class="clickup-card-header">
+        <div>
+          <h5 class="mb-1">Connection</h5>
+          <p class="app-muted mb-0">
+            Keep ClickUp credentials on the server and refresh the workspace connection from Hydra.
+          </p>
+        </div>
+        <button
+          class="btn btn-sm app-btn-outline"
+          type="button"
+          [disabled]="store.statusLoading() || store.connectLoading()"
+          (click)="onRefreshStatus()"
+        >
+          @if (store.statusLoading()) {
+            <span class="spinner-border spinner-border-sm me-2" aria-hidden="true"></span>
+          }
+          Refresh status
+        </button>
+      </div>
+
+      <form class="clickup-form" [formGroup]="form" (ngSubmit)="onConnect()">
+        <app-input
+          label="ClickUp token"
+          type="password"
+          id="clickup-token"
+          formControlName="token"
+          placeholder="Enter a personal or app token"
+        ></app-input>
+
+        <div class="app-muted small">
+          The token is sent only to the Hydra API and never stored in browser storage.
+        </div>
+
+        <div class="row g-3">
+          <div class="col-12 col-md-6">
+            <app-input
+              label="Default workspace ID"
+              id="clickup-workspace-id"
+              formControlName="defaultWorkspaceId"
+              placeholder="Optional"
+            ></app-input>
+          </div>
+
+          <div class="col-12 col-md-6">
+            <app-input
+              label="Default workspace name"
+              id="clickup-workspace-name"
+              formControlName="defaultWorkspaceName"
+              placeholder="Optional"
+            ></app-input>
+          </div>
+        </div>
+
+        @if (form.controls.token.invalid && form.controls.token.touched) {
+          <div class="text-danger small">The ClickUp token is required.</div>
+        }
+
+        <div class="d-flex flex-wrap gap-2 pt-2">
+          <button
+            class="btn btn-primary"
+            type="submit"
+            [disabled]="store.connectLoading()"
+          >
+            @if (store.connectLoading()) {
+              <span class="spinner-border spinner-border-sm me-2" aria-hidden="true"></span>
+            }
+            {{ store.isConnected() ? 'Update connection' : 'Connect' }}
+          </button>
+
+          @if (store.isConnected()) {
+            <div class="clickup-inline-hint app-muted small">
+              Connected workspaces will refresh right after a successful update.
+            </div>
+          }
+        </div>
+      </form>
+    </app-card>
+  </div>
+
+  <div class="col-12 col-xl-7">
+    <app-card padding="p-4" class="h-100">
+      <div class="clickup-card-header">
+        <div>
+          <h5 class="mb-1">Integration status</h5>
+          <p class="app-muted mb-0">Current connection health, default workspace and verification data.</p>
+        </div>
+        <app-badge [tone]="statusTone()">{{ formatStatusLabel(store.status().status) }}</app-badge>
+      </div>
+
+      @if (store.statusError()) {
+        <div class="alert alert-danger mb-3">{{ store.statusError() }}</div>
+      }
+
+      <div class="clickup-status-grid">
+        <div class="clickup-status-tile">
+          <span class="clickup-status-label">Connection</span>
+          <strong>{{ store.status().connected ? 'Connected' : 'Disconnected' }}</strong>
+        </div>
+        <div class="clickup-status-tile">
+          <span class="clickup-status-label">Default workspace</span>
+          <strong>
+            {{ store.status().defaultWorkspaceName || store.status().defaultWorkspaceId || 'Not configured' }}
+          </strong>
+        </div>
+        <div class="clickup-status-tile">
+          <span class="clickup-status-label">Last verification</span>
+          <strong>{{ formatLastChecked(store.status().lastCheckedAt) }}</strong>
+        </div>
+      </div>
+
+      @if (store.status().errorMessage || store.status().message) {
+        <div class="clickup-status-message">
+          {{ store.status().errorMessage || store.status().message }}
+        </div>
+      }
+
+      @if (hasWorkspaceHint()) {
+        <div class="clickup-status-footnote app-muted small">
+          Preferred workspace: {{ store.status().defaultWorkspaceName || 'Unnamed workspace' }}
+          @if (store.status().defaultWorkspaceId) {
+            <span>- ID {{ store.status().defaultWorkspaceId }}</span>
+          }
+        </div>
+      }
+    </app-card>
+  </div>
+</div>
+
+<div class="row g-4 mt-1">
+  <div class="col-12 col-xl-4">
+    <app-card padding="p-4" class="h-100">
+      <div class="clickup-card-header mb-3">
+        <div>
+          <h5 class="mb-1">Spaces</h5>
+          <p class="app-muted mb-0">Browse ClickUp spaces exposed by the Hydra API.</p>
+        </div>
+      </div>
+
+      @if (store.spacesError()) {
+        <div class="alert alert-danger mb-3">{{ store.spacesError() }}</div>
+      }
+
+      @if (store.spacesLoading()) {
+        <div class="clickup-empty-state">
+          <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+          <span>Loading spaces...</span>
+        </div>
+      } @else if (!store.isConnected()) {
+        <div class="clickup-empty-state">
+          <span>Connect ClickUp to load spaces and workspace details.</span>
+        </div>
+      } @else if (store.spaces().length === 0) {
+        <div class="clickup-empty-state">
+          <span>No spaces were returned by Hydra for this connection.</span>
+        </div>
+      } @else {
+        <label class="form-label" for="clickup-space-select">Selected space</label>
+        <select
+          id="clickup-space-select"
+          class="form-select app-input"
+          [value]="store.selectedSpaceId() ?? ''"
+          [disabled]="store.hierarchyLoading()"
+          (change)="onSpaceChange($event)"
+        >
+          @for (space of store.spaces(); track trackSpace($index, space)) {
+            <option [value]="space.id">{{ space.name }} - {{ space.workspace.name }}</option>
+          }
+        </select>
+
+        <div class="clickup-space-list mt-3">
+          @for (space of store.spaces(); track trackSpace($index, space)) {
+            <button
+              class="clickup-space-card"
+              type="button"
+              [class.is-active]="store.selectedSpaceId() === space.id"
+              (click)="store.selectSpace(space.id)"
+            >
+              <div class="clickup-space-card__title">{{ space.name }}</div>
+              <div class="clickup-space-card__meta">
+                {{ space.workspace.name }} - {{ space.private ? 'Private' : 'Shared' }}
+              </div>
+            </button>
+          }
+        </div>
+      }
+    </app-card>
+  </div>
+
+  <div class="col-12 col-xl-8">
+    <app-card padding="p-4" class="h-100">
+      <div class="clickup-card-header mb-3">
+        <div>
+          <h5 class="mb-1">Folders and lists</h5>
+          <p class="app-muted mb-0">Select a list to inspect normalized tasks from the Hydra API.</p>
+        </div>
+      </div>
+
+      @if (store.hierarchyError()) {
+        <div class="alert alert-danger mb-3">{{ store.hierarchyError() }}</div>
+      }
+
+      @if (store.hierarchyLoading()) {
+        <div class="clickup-empty-state">
+          <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+          <span>Loading folders and lists...</span>
+        </div>
+      } @else if (!store.selectedSpace()) {
+        <div class="clickup-empty-state">
+          <span>Select a space to inspect folders and lists.</span>
+        </div>
+      } @else if (store.lists().length === 0) {
+        <div class="clickup-empty-state">
+          <span>This space does not have lists available yet.</span>
+        </div>
+      } @else {
+        <div class="clickup-list-groups">
+          @for (group of groupedLists(); track trackGroup($index, group)) {
+            <section class="clickup-list-group">
+              <div class="clickup-list-group__header">
+                <div>
+                  <h6 class="mb-1">{{ group.folder?.name || 'Lists without folder' }}</h6>
+                  <div class="app-muted small">
+                    @if (group.folder) {
+                      {{ group.folder.hidden ? 'Hidden folder' : 'Visible folder' }}
+                    } @else {
+                      Standalone lists returned directly from the selected space.
+                    }
+                  </div>
+                </div>
+                <span class="clickup-list-group__count">{{ group.lists.length }} lists</span>
+              </div>
+
+              <div class="clickup-list-chip-grid">
+                @for (list of group.lists; track trackList($index, list)) {
+                  <button
+                    class="clickup-list-chip"
+                    type="button"
+                    [class.is-active]="store.selectedListId() === list.id"
+                    (click)="onSelectList(list.id)"
+                  >
+                    <span>{{ list.name }}</span>
+                    <small>ID {{ list.id }}</small>
+                  </button>
+                }
+              </div>
+            </section>
+          }
+        </div>
+      }
+    </app-card>
+  </div>
+</div>
+
+<div class="row g-4 mt-1">
+  <div class="col-12 col-xl-9">
+    <app-card padding="p-4">
+      <div class="clickup-card-header mb-3">
+        <div>
+          <h5 class="mb-1">Tasks</h5>
+          <p class="app-muted mb-0">
+            Normalized ClickUp tasks returned by Hydra for the selected list.
+          </p>
+        </div>
+
+        @if (store.selectedList()) {
+          <div class="clickup-task-actions">
+            <button
+              class="btn btn-sm app-btn-outline"
+              type="button"
+              [disabled]="store.tasksLoading() || store.tasksPagination().page === 0"
+              (click)="store.loadPreviousTasksPage()"
+            >
+              Previous
+            </button>
+            <button
+              class="btn btn-sm app-btn-outline"
+              type="button"
+              [disabled]="store.tasksLoading() || !store.tasksPagination().hasMore"
+              (click)="store.loadNextTasksPage()"
+            >
+              Next
+            </button>
+          </div>
+        }
+      </div>
+
+      @if (store.tasksError()) {
+        <div class="alert alert-danger mb-3">{{ store.tasksError() }}</div>
+      }
+
+      @if (store.tasksLoading()) {
+        <div class="clickup-empty-state clickup-empty-state--compact">
+          <span class="spinner-border spinner-border-sm" aria-hidden="true"></span>
+          <span>Loading tasks...</span>
+        </div>
+      } @else if (!store.selectedList()) {
+        <div class="clickup-empty-state clickup-empty-state--compact">
+          <span>Select a list to load tasks.</span>
+        </div>
+      } @else {
+        <div class="clickup-task-summary">
+          <div>
+            <strong>{{ store.selectedList()?.name }}</strong>
+            <span class="app-muted">List ID {{ store.selectedList()?.id }}</span>
+          </div>
+          <div class="app-muted small">
+            Page {{ store.tasksPagination().page + 1 }}
+            @if (store.tasksPagination().hasMore) {
+              <span>- more tasks available</span>
+            } @else {
+              <span>- last page</span>
+            }
+          </div>
+        </div>
+
+        <app-table
+          [rows]="store.tasks()"
+          [columns]="taskColumns"
+          [rowId]="rowId"
+          [selectable]="false"
+        ></app-table>
+      }
+    </app-card>
+  </div>
+
+  <div class="col-12 col-xl-3">
+    <app-card padding="p-4" class="h-100">
+      <div class="clickup-card-header mb-3">
+        <div>
+          <h5 class="mb-1">Ready for next steps</h5>
+          <p class="app-muted mb-0">The screen is organized for future ClickUp capabilities.</p>
+        </div>
+      </div>
+
+      <div class="clickup-future-grid">
+        <div class="clickup-future-card">
+          <strong>Sync jobs</strong>
+          <span class="app-muted">Reserve this area for manual or scheduled synchronization.</span>
+        </div>
+        <div class="clickup-future-card">
+          <strong>Webhooks</strong>
+          <span class="app-muted">Prepare webhook registration and event monitoring controls.</span>
+        </div>
+        <div class="clickup-future-card">
+          <strong>Custom fields</strong>
+          <span class="app-muted">Map Hydra fields to ClickUp metadata when the API is ready.</span>
+        </div>
+        <div class="clickup-future-card">
+          <strong>Disconnect</strong>
+          <span class="app-muted">Keep room for revoking the current ClickUp connection safely.</span>
+        </div>
+      </div>
+    </app-card>
+  </div>
+</div>

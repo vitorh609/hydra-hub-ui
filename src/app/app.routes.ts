@@ -10,6 +10,7 @@ import { AccountSettingsPageComponent } from './features/dashboard/pages/account
 import { PricingPageComponent } from './features/dashboard/pages/pricing-page/pricing-page.component';
 import { DocumentsPageComponent } from './features/dashboard/pages/documents-page/documents-page.component';
 import { TicketsPageComponent } from './features/dashboard/pages/tickets-page/tickets-page.component';
+import { ClickupIntegrationPageComponent } from './features/dashboard/pages/clickup-integration-page/clickup-integration-page.component';
 
 export const routes: Routes = [
   {
@@ -60,6 +61,10 @@ export const routes: Routes = [
       {
         path: 'tickets',
         component: TicketsPageComponent,
+      },
+      {
+        path: 'integrations/clickup',
+        component: ClickupIntegrationPageComponent,
       },
     ],
   },
