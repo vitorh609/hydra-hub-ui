@@ -30,8 +30,43 @@
         <app-icon name="moon" [size]="18"></app-icon>
       }
     </button>
-    <div class="profile topbar-action">
-      <app-icon name="user" [size]="22"></app-icon>
+    <div class="profile-menu" [class.is-open]="isProfileMenuOpen()">
+      <button
+        class="btn topbar-action profile-trigger profile"
+        type="button"
+        aria-haspopup="menu"
+        [attr.aria-expanded]="isProfileMenuOpen()"
+        aria-label="Open user menu"
+        (click)="toggleProfileMenu()"
+      >
+        <app-icon name="user" [size]="22"></app-icon>
+      </button>
+
+      <div class="profile-dropdown" role="menu" [attr.aria-hidden]="!isProfileMenuOpen()">
+        <div class="profile-summary">
+          <span class="profile-summary__eyebrow">Signed in as</span>
+          <strong class="profile-summary__name">{{ currentUser()?.name ?? 'Hydra Hub User' }}</strong>
+          <span class="profile-summary__email">{{ currentUser()?.email ?? 'user@hydrahub.app' }}</span>
+        </div>
+
+        <div class="profile-dropdown__actions">
+          @for (item of profileMenuItems; track item.id) {
+            <button
+              class="btn profile-dropdown__item"
+              type="button"
+              role="menuitem"
+              [class.is-danger]="item.tone === 'danger'"
+              [class.is-logout]="item.id === 'logout'"
+              (click)="onProfileMenuAction(item)"
+            >
+              <span class="profile-dropdown__icon" aria-hidden="true">
+                <app-icon class="profile-dropdown__app-icon" [name]="item.icon" [size]="18"></app-icon>
+              </span>
+              <span class="profile-dropdown__label">{{ item.label }}</span>
+            </button>
+          }
+        </div>
+      </div>
     </div>
   </div>
 </header>

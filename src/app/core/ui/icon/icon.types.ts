@@ -33,7 +33,8 @@ export type AppIconName =
   | 'heart'
   | 'heart-filled'
   | 'filter'
-  | 'x';
+  | 'x'
+  | 'logout';
 
 export const iconSources: Record<AppIconName, string> = {
   menu: 'assets/icons/menu-2.svg',
@@ -71,4 +72,5 @@ export const iconSources: Record<AppIconName, string> = {
   'heart-filled': 'assets/icons/heart-filled.svg',
   filter: 'assets/icons/filter.svg',
   x: 'assets/icons/x.svg',
+  logout: 'assets/icons/logout.svg',
 };
