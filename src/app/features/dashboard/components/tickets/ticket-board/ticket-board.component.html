@@ -2,9 +2,29 @@
   <header class="ticket-board__header">
     <div>
       <p class="ticket-board__eyebrow mb-1">Workflow</p>
-      <h4 class="mb-0">Kanban overview</h4>
+      <h4 class="mb-0">{{ viewMode() === 'board' ? 'Kanban overview' : 'Ticket list' }}</h4>
     </div>
     <div class="ticket-board__summary-group">
+      <div class="ticket-board__view-toggle" aria-label="Ticket view mode">
+        <button
+          class="ticket-board__view-option"
+          type="button"
+          [class.is-active]="viewMode() === 'board'"
+          [attr.aria-pressed]="viewMode() === 'board'"
+          (click)="setViewMode('board')"
+        >
+          Kanban
+        </button>
+        <button
+          class="ticket-board__view-option"
+          type="button"
+          [class.is-active]="viewMode() === 'list'"
+          [attr.aria-pressed]="viewMode() === 'list'"
+          (click)="setViewMode('list')"
+        >
+          List
+        </button>
+      </div>
       <button class="btn btn-primary ticket-board__action" type="button" (click)="openCreateModal()">
         Add Ticket
       </button>
@@ -15,17 +35,29 @@
     </div>
   </header>
 
-  <div class="ticket-board__grid">
-    @for (column of columns; track column.status) {
-      <app-ticket-column
-        [title]="column.title"
-        [status]="column.status"
-        [tickets]="ticketsByStatus()[column.status]"
-        (ticketCreated)="createInlineTicket($event)"
-        (ticketDropped)="handleDrop($event)"
-        (ticketStatusChanged)="handleDrop($event)"
-        (ticketOpened)="openTicket($event)"
-      ></app-ticket-column>
-    }
-  </div>
+  @if (viewMode() === 'board') {
+    <div class="ticket-board__grid">
+      @for (column of columns; track column.status) {
+        <app-ticket-column
+          [title]="column.title"
+          [status]="column.status"
+          [tickets]="ticketsByStatus()[column.status]"
+          (ticketCreated)="createInlineTicket($event)"
+          (ticketDropped)="handleDrop($event)"
+          (ticketStatusChanged)="handleDrop($event)"
+          (ticketOpened)="openTicket($event)"
+        ></app-ticket-column>
+      }
+    </div>
+  } @else {
+    <div class="ticket-board__list">
+      <app-table
+        [rows]="tickets()"
+        [columns]="ticketTableColumns"
+        [actions]="ticketTableActions"
+        [rowId]="rowId"
+        [selectable]="false"
+      ></app-table>
+    </div>
+  }
 </section>
