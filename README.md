@@ -92,52 +92,17 @@ Arquivos:
 - `src/app/features/dashboard/components/table/table.component.html`
 - `src/app/features/dashboard/components/table/table.component.scss`
 - `src/app/features/dashboard/components/table/table.types.ts`
+- `src/app/features/dashboard/components/table/README.md`
 
-### Tipos
+Antes de criar uma lista, grade ou tabela nova no dashboard, confira o guia completo em
+`src/app/features/dashboard/components/table/README.md`.
 
-```ts
-import type { TableColumn, RowAction, TableState } from 'src/app/features/dashboard/components/table/table.types';
-```
-
-- `TableColumn<T>`: define as colunas. Use `cell(row)` para HTML customizado ou `prop` para leitura direta.
-- `RowAction<T>`: define acoes por linha (menu kebab). `icon` deve ser um `AppIconName`.
-- `TableState`: pagina atual, pageSize e total.
-
-### Exemplo de uso
-
-```ts
-columns: TableColumn<ProductListItem>[] = [
-  { key: 'name', header: 'Product', cell: (row) => this.renderProduct(row) },
-  { key: 'date', header: 'Date', cell: (row) => this.formatDate(row.date) },
-  { key: 'status', header: 'Status', cell: (row) => this.renderStatus(row.status) },
-  { key: 'price', header: 'Price', align: 'end', cell: (row) => this.formatCurrency(row.price) },
-];
-
-actions: RowAction<ProductListItem>[] = [
-  { id: 'view', label: 'View', icon: 'eye', action: (row) => this.view(row) },
-  { id: 'edit', label: 'Edit', icon: 'edit', action: (row) => this.edit(row) },
-  { id: 'delete', label: 'Delete', icon: 'trash', variant: 'danger', action: (row) => this.remove(row) },
-];
-
-state: TableState = { page: 1, pageSize: 5, total: 0 };
-```
-
-```html
-<app-table
-  [rows]="pagedProducts()"
-  [columns]="columns"
-  [actions]="actions"
-  [rowId]="rowId"
-  [state]="state()"
-  (stateChange)="onStateChange($event)"
-  (selectionChange)="onSelectionChange($event)"
-></app-table>
-```
-
-### Notas
-- `rowId` e obrigatorio para selecao.
-- `selectable` pode ser desativado com `[selectable]="false"`.
-- `cell(row)` retorna HTML (string) e e renderizado via `innerHTML`. Use apenas conteudo gerado no codigo.
+Resumo:
+- Use `TableColumn<T>` para colunas, `RowAction<T>` para acoes e `TableState` para paginacao.
+- `rowId` e obrigatorio e deve ser estavel.
+- Desative selecao com `[selectable]="false"` quando a lista nao usa checkbox.
+- Omita `[state]` quando a tabela nao precisa de paginacao.
+- `cell(row)` retorna HTML via `innerHTML`; nao use bindings/eventos Angular dentro da string e escape conteudo dinamico.
 
 ## Tema (dark/light)
 

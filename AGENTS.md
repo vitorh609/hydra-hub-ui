@@ -18,6 +18,7 @@ Projeto Angular com foco em componentes standalone, reaproveitamento de UI e con
 - Antes de implementar feature de dashboard, leia `README.md`.
 - Se a tarefa envolver `documents`, leia `src/app/features/dashboard/pages/documents-page/README.md`.
 - Se a tarefa envolver `notes`, leia `src/app/features/dashboard/components/notes/README.md`.
+- Se a tarefa envolver tabela, lista ou grade reutilizavel do dashboard, leia `src/app/features/dashboard/components/table/README.md` e use o skill repo-local `dashboard-table` quando disponivel.
 - Ao alterar UI, valide responsividade e compatibilidade com tema dark/light.
 - Ao criar componente novo, mantenha tipagem estrita e siga os padroes de standalone component do projeto.
 
