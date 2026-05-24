@@ -10,3 +10,10 @@ export interface Ticket {
   codTicket: string;
   status: TicketStatus;
 }
+
+export interface RelatedTicket {
+  id: string;
+  title: string;
+  status: TicketStatus;
+  dueDate: string | null;
+}

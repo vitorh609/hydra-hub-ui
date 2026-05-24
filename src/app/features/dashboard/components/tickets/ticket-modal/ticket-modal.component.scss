@@ -38,3 +38,174 @@
   color: var(--danger);
   font-size: 0.82rem;
 }
+
+.ticket-modal__switch-feedback {
+  margin-bottom: 1rem;
+  animation: ticket-modal-result-in 0.2s ease both;
+}
+
+.ticket-modal__relations {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid var(--border);
+}
+
+.ticket-modal__relation-search {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.ticket-modal__hint {
+  color: var(--text-2);
+}
+
+.ticket-modal__search-results,
+.ticket-modal__related-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.ticket-modal__search-results {
+  max-height: 12rem;
+  overflow-y: auto;
+}
+
+.ticket-modal__search-result,
+.ticket-modal__related-item {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 0.65rem;
+  padding: 0.75rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: color-mix(in srgb, var(--surface-1) 74%, var(--surface-2));
+  box-shadow: 0 0.75rem 1.65rem color-mix(in srgb, var(--text-1) 10%, transparent);
+  color: var(--text-1);
+  text-align: left;
+  transition: all 0.2s ease;
+}
+
+.ticket-modal__search-result {
+  animation: ticket-modal-result-in 0.2s ease both;
+}
+
+.ticket-modal__search-result:hover,
+.ticket-modal__search-result:focus-visible,
+.ticket-modal__related-item:hover,
+.ticket-modal__related-item:focus-visible {
+  outline: none;
+  transform: translateY(-1px);
+  background: var(--interactive-hover-bg);
+  border-color: var(--interactive-hover-border);
+  box-shadow: 0 1rem 2rem color-mix(in srgb, var(--text-1) 14%, transparent);
+}
+
+.ticket-modal__related-item {
+  grid-template-columns: minmax(0, 1fr) auto;
+  cursor: pointer;
+}
+
+.ticket-modal__related-main {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 0.65rem;
+  min-width: 0;
+}
+
+.ticket-modal__related-title {
+  min-width: 0;
+  overflow: hidden;
+  font-weight: 700;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.ticket-modal__status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 6.75rem;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.ticket-modal__status.is-todo {
+  background: color-mix(in srgb, var(--primary) 18%, transparent);
+  color: var(--primary);
+}
+
+.ticket-modal__status.is-in-progress {
+  background: color-mix(in srgb, var(--warning) 20%, transparent);
+  color: color-mix(in srgb, var(--warning) 72%, var(--text-1));
+}
+
+.ticket-modal__status.is-done {
+  background: color-mix(in srgb, var(--success) 20%, transparent);
+  color: color-mix(in srgb, var(--success) 72%, var(--text-1));
+}
+
+.ticket-modal__due-date {
+  color: var(--text-2);
+  white-space: nowrap;
+}
+
+.ticket-modal__remove-relation {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2rem;
+  height: 2rem;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--surface-2);
+  color: var(--text-2);
+}
+
+.ticket-modal__remove-relation:hover,
+.ticket-modal__remove-relation:focus-visible {
+  outline: none;
+  background: color-mix(in srgb, var(--danger) 12%, var(--surface-2));
+  border-color: color-mix(in srgb, var(--danger) 36%, var(--border));
+  color: var(--danger);
+}
+
+.ticket-modal__empty {
+  padding: 0.85rem;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius-lg);
+  color: var(--text-2);
+}
+
+.ticket-modal__empty.is-error {
+  color: var(--danger);
+  border-color: color-mix(in srgb, var(--danger) 36%, var(--border));
+}
+
+@media (max-width: 767.98px) {
+  .ticket-modal__search-result,
+  .ticket-modal__related-main {
+    grid-template-columns: 1fr;
+  }
+
+  .ticket-modal__related-title {
+    white-space: normal;
+  }
+}
+
+@keyframes ticket-modal-result-in {
+  from {
+    opacity: 0;
+    transform: translateY(-0.35rem);
+  }
+}

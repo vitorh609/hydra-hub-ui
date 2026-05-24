@@ -8,7 +8,13 @@
   <button class="btn-close" type="button" aria-label="Close" (click)="cancel()"></button>
 </div>
 
-<div class="modal-body">
+<div #modalBody class="modal-body">
+  @if (switchingTicket()) {
+    <div class="ticket-modal__empty ticket-modal__switch-feedback" role="status" aria-live="polite">
+      Loading {{ switchingTicketTitle() }}...
+    </div>
+  }
+
   <form class="ticket-modal__form" [formGroup]="form">
     <app-input
       id="ticket-title"
@@ -76,6 +82,96 @@
       />
     </div>
   </form>
+
+  @if (!isCreateMode) {
+    <section class="ticket-modal__relations" aria-labelledby="related-tasks-title">
+      <div>
+        <div>
+          <h6 id="related-tasks-title" class="mb-1">Related tasks</h6>
+          <p class="ticket-modal__subtitle mb-0">Link tickets that share context or dependencies.</p>
+        </div>
+      </div>
+
+      <div class="ticket-modal__relation-search">
+        <app-input
+          id="ticket-relation-search"
+          label="Link another task"
+          type="search"
+          placeholder="Search by title"
+          [formControl]="relatedSearchControl"
+        ></app-input>
+
+        @if (searchLoading()) {
+          <div class="ticket-modal__hint">Searching tasks...</div>
+        } @else if (relatedSearchControl.value.trim().length === 1) {
+          <div class="ticket-modal__hint">Type at least 2 characters to search.</div>
+        } @else if (searchCompleted() && !ticketSearchResults().length) {
+          <div class="ticket-modal__hint">No available tasks found.</div>
+        }
+
+        @if (ticketSearchResults().length) {
+          <div class="ticket-modal__search-results" aria-label="Task search results">
+            @for (ticket of ticketSearchResults(); track ticket.id) {
+              <button
+                class="ticket-modal__search-result"
+                type="button"
+                [disabled]="relationSaving()"
+                (click)="addRelation(ticket)"
+              >
+                <span class="ticket-modal__related-title">{{ ticket.title }}</span>
+                <span class="ticket-modal__status" [ngClass]="statusClass(ticket.status)">
+                  {{ statusLabel(ticket.status) }}
+                </span>
+                <span class="ticket-modal__due-date">
+                  {{ ticket.dueDate ? (ticket.dueDate | date: 'MMM d, y') : 'No due date' }}
+                </span>
+              </button>
+            }
+          </div>
+        }
+      </div>
+
+      <div class="ticket-modal__related-list" aria-live="polite">
+        @if (relationsLoading()) {
+          <div class="ticket-modal__empty">Loading related tasks...</div>
+        } @else if (relationsError()) {
+          <div class="ticket-modal__empty is-error">{{ relationsError() }}</div>
+        } @else if (!relatedTickets().length) {
+          <div class="ticket-modal__empty">No related tasks yet.</div>
+        } @else {
+          @for (ticket of relatedTickets(); track ticket.id) {
+            <article
+              class="ticket-modal__related-item"
+              tabindex="0"
+              (click)="openRelatedTicket(ticket)"
+              (keydown.enter)="openRelatedTicket(ticket)"
+              (keydown.space)="$event.preventDefault(); openRelatedTicket(ticket)"
+            >
+              <div class="ticket-modal__related-main">
+                <span class="ticket-modal__related-title">{{ ticket.title }}</span>
+                <span class="ticket-modal__status" [ngClass]="statusClass(ticket.status)">
+                  {{ statusLabel(ticket.status) }}
+                </span>
+                <span class="ticket-modal__due-date">
+                  {{ ticket.dueDate ? (ticket.dueDate | date: 'MMM d, y') : 'No due date' }}
+                </span>
+              </div>
+
+              <button
+                class="ticket-modal__remove-relation"
+                type="button"
+                aria-label="Remove related task"
+                [disabled]="relationSaving()"
+                (click)="removeRelation(ticket, $event)"
+              >
+                <app-icon name="x" [size]="16"></app-icon>
+              </button>
+            </article>
+          }
+        }
+      </div>
+    </section>
+  }
 </div>
 
 <div class="modal-footer">
