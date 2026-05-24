@@ -97,6 +97,8 @@
   gap: 1rem;
   grid-template-columns: repeat(3, minmax(320px, 1fr));
   align-items: stretch;
+  height: clamp(24rem, calc(100vh - 22rem), 44rem);
+  min-height: 24rem;
   overflow-x: auto;
   overflow-y: hidden;
   padding-bottom: 0.5rem;
@@ -156,6 +158,11 @@
 }
 
 @media (max-width: 767.98px) {
+  .ticket-board__grid {
+    height: clamp(22rem, calc(100vh - 18rem), 38rem);
+    min-height: 22rem;
+  }
+
   .ticket-board__header {
     flex-direction: column;
     align-items: flex-start;
