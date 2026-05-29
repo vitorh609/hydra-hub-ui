@@ -1,0 +1,162 @@
+<section class="whiteboard-shell">
+  <div class="whiteboard-toolbar" aria-label="Ferramentas do quadro branco">
+    <div class="tool-group">
+      @for (tool of tools; track tool.tool) {
+        <button
+          class="tool-button"
+          type="button"
+          [class.active]="activeTool() === tool.tool"
+          [attr.aria-label]="tool.label"
+          [attr.title]="tool.label"
+          (click)="setTool(tool.tool)"
+        >
+          <app-icon [name]="tool.icon" [size]="18"></app-icon>
+        </button>
+      }
+    </div>
+
+    <div class="tool-group">
+      <button
+        class="tool-button"
+        type="button"
+        aria-label="Desfazer"
+        title="Desfazer"
+        [disabled]="!canUndo()"
+        (click)="undo()"
+      >
+        <app-icon name="arrow-back-up" [size]="18"></app-icon>
+      </button>
+      <button
+        class="tool-button"
+        type="button"
+        aria-label="Refazer"
+        title="Refazer"
+        [disabled]="!canRedo()"
+        (click)="redo()"
+      >
+        <app-icon name="arrow-forward-up" [size]="18"></app-icon>
+      </button>
+    </div>
+
+    <div class="tool-group zoom-group">
+      <button
+        class="tool-button"
+        type="button"
+        aria-label="Diminuir zoom"
+        title="Diminuir zoom"
+        (click)="zoomOut()"
+      >
+        <app-icon name="zoom-out" [size]="18"></app-icon>
+      </button>
+      <span class="zoom-value">{{ zoomPercent() }}%</span>
+      <button
+        class="tool-button"
+        type="button"
+        aria-label="Aumentar zoom"
+        title="Aumentar zoom"
+        (click)="zoomIn()"
+      >
+        <app-icon name="zoom-in" [size]="18"></app-icon>
+      </button>
+    </div>
+
+    <button
+      class="tool-button export-button"
+      type="button"
+      aria-label="Exportar PNG"
+      title="Exportar PNG"
+      (click)="exportPng()"
+    >
+      <app-icon name="download" [size]="18"></app-icon>
+    </button>
+  </div>
+
+  <aside class="properties-panel" aria-label="Propriedades do elemento">
+    <div class="panel-title">Propriedades</div>
+
+    <label class="property-row" title="Cor da borda">
+      <span>Borda</span>
+      <input
+        type="color"
+        [ngModel]="currentStyle().stroke"
+        (ngModelChange)="updateStroke($event)"
+      />
+    </label>
+
+    <label class="property-row" title="Cor de preenchimento">
+      <span>Preenchimento</span>
+      <input type="color" [ngModel]="currentStyle().fill" (ngModelChange)="updateFill($event)" />
+    </label>
+
+    <label class="property-stack" title="Espessura da linha">
+      <span>Espessura</span>
+      <input
+        type="range"
+        min="1"
+        max="20"
+        step="1"
+        [ngModel]="currentStyle().strokeWidth"
+        (ngModelChange)="updateStrokeWidth($event)"
+      />
+      <output>{{ currentStyle().strokeWidth }}px</output>
+    </label>
+
+    <label class="property-stack" title="Estilo da linha">
+      <span>Linha</span>
+      <select [ngModel]="currentStyle().lineStyle" (ngModelChange)="updateLineStyle($event)">
+        @for (style of lineStyles; track style.value) {
+          <option [value]="style.value">{{ style.label }}</option>
+        }
+      </select>
+    </label>
+
+    <label class="property-stack" title="Opacidade">
+      <span>Opacidade</span>
+      <input
+        type="range"
+        min="0.1"
+        max="1"
+        step="0.05"
+        [ngModel]="currentStyle().opacity"
+        (ngModelChange)="updateOpacity($event)"
+      />
+      <output>{{ currentStyle().opacity | percent: '1.0-0' }}</output>
+    </label>
+
+    <label class="property-stack" title="Tamanho da fonte">
+      <span>Fonte</span>
+      <input
+        type="number"
+        min="10"
+        max="96"
+        [ngModel]="currentStyle().fontSize"
+        (ngModelChange)="updateFontSize($event)"
+      />
+    </label>
+
+    @if (selectedElement(); as element) {
+      <div class="selection-meta">
+        <span>Selecionado</span>
+        <strong>{{ element.type }}</strong>
+      </div>
+    }
+  </aside>
+
+  <div #stageHost class="stage-host" [attr.data-tool]="activeTool()">
+    @if (textEditorState(); as editor) {
+      <textarea
+        #textEditor
+        class="text-editor"
+        [style.left.px]="editor.screenX"
+        [style.top.px]="editor.screenY"
+        [style.font-size.px]="currentStyle().fontSize"
+        [ngModel]="editor.value"
+        (ngModelChange)="updateTextEditorValue($event)"
+        (blur)="commitTextEditor()"
+        (keydown.escape)="cancelTextEditor()"
+        (keydown.control.enter)="commitTextEditor()"
+        placeholder="Texto"
+      ></textarea>
+    }
+  </div>
+</section>

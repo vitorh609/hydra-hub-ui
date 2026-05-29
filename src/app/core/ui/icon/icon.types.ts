@@ -33,6 +33,21 @@ export type AppIconName =
   | 'heart'
   | 'heart-filled'
   | 'filter'
+  | 'select'
+  | 'hand-stop'
+  | 'rectangle'
+  | 'circle'
+  | 'line'
+  | 'arrow-right'
+  | 'pencil'
+  | 'cursor-text'
+  | 'eraser'
+  | 'arrow-back-up'
+  | 'arrow-forward-up'
+  | 'zoom-in'
+  | 'zoom-out'
+  | 'download'
+  | 'chalkboard'
   | 'x'
   | 'logout';
 
@@ -71,6 +86,21 @@ export const iconSources: Record<AppIconName, string> = {
   heart: 'assets/icons/heart.svg',
   'heart-filled': 'assets/icons/heart-filled.svg',
   filter: 'assets/icons/filter.svg',
+  select: 'assets/icons/select.svg',
+  'hand-stop': 'assets/icons/hand-stop.svg',
+  rectangle: 'assets/icons/rectangle.svg',
+  circle: 'assets/icons/circle.svg',
+  line: 'assets/icons/line.svg',
+  'arrow-right': 'assets/icons/arrow-right.svg',
+  pencil: 'assets/icons/pencil.svg',
+  'cursor-text': 'assets/icons/cursor-text.svg',
+  eraser: 'assets/icons/eraser.svg',
+  'arrow-back-up': 'assets/icons/arrow-back-up.svg',
+  'arrow-forward-up': 'assets/icons/arrow-forward-up.svg',
+  'zoom-in': 'assets/icons/zoom-in.svg',
+  'zoom-out': 'assets/icons/zoom-out.svg',
+  download: 'assets/icons/download.svg',
+  chalkboard: 'assets/icons/chalkboard.svg',
   x: 'assets/icons/x.svg',
   logout: 'assets/icons/logout.svg',
 };

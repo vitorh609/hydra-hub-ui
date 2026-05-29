@@ -31,6 +31,13 @@ export const routes: Routes = [
         component: Dashboard2PageComponent,
       },
       {
+        path: 'apps/whiteboard',
+        loadComponent: () =>
+          import('./features/dashboard/pages/whiteboard/whiteboard.component').then(
+            (component) => component.WhiteboardComponent,
+          ),
+      },
+      {
         path: 'apps/notes',
         component: NotesPageComponent,
       },
